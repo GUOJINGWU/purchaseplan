@@ -1,0 +1,93 @@
+package com.youzhicai.purchaseplan.service.impl;
+
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.youzhicai.purchaseplan.common.constant.TypeTokens;
+import com.youzhicai.purchaseplan.common.util.POUtil;
+import com.youzhicai.purchaseplan.dao.PurchaseInformationDAO;
+import com.youzhicai.purchaseplan.dto.PurchaseInformationDTO;
+import com.youzhicai.purchaseplan.dto.PurchaseInformationPageDTO;
+import com.youzhicai.purchaseplan.handler.Page;
+import com.youzhicai.purchaseplan.po.PurchaseInformationPO;
+import com.youzhicai.purchaseplan.service.PurchaseInformationService;
+import com.youzhicai.purchaseplan.vo.PurchaseInformationVO;
+
+/**
+ * 
+ * @author xia.nan
+ *
+ */
+@Service
+public class PurchaseInformationServiceImpl implements PurchaseInformationService {
+
+    @Autowired
+    private PurchaseInformationDAO purchaseInformationDAO;
+
+    /**
+     * 
+     */
+    @Override
+    public int savePurchaseInformation(PurchaseInformationDTO pDto) {
+        PurchaseInformationPO po = POUtil.convert(pDto, PurchaseInformationPO.class);
+        int rst = purchaseInformationDAO.savePurchaseInformation(po);
+        return rst;
+    }
+
+    /**
+     * 
+     */
+    @Override
+    public Page<PurchaseInformationVO> getPurchaseInformationByPage(PurchaseInformationPageDTO pageDTO) {
+        int pageNum;
+        int pageSize;
+        pageNum = (pageNum = pageDTO.getPageNum()) > 0 ? pageNum : 1;
+        pageSize = (pageSize = pageDTO.getPageSize()) > 0 ? pageSize : 10;
+        HashMap<String, Object> queryMap = new HashMap<String, Object>();
+        queryMap.put("pageNum", (pageNum - 1) * pageSize);
+        queryMap.put("pageSize", pageSize);
+        queryMap.put("demandNumber", StringUtils.isBlank(pageDTO.getDemand_number()) ? null : pageDTO.getDemand_number());
+        queryMap.put("createName", StringUtils.isBlank(pageDTO.getCreate_name()) ? null : pageDTO.getCreate_name());
+        queryMap.put("startTime", pageDTO.getStartTime() == null ? null : pageDTO.getStartTime());
+        queryMap.put("endTime", pageDTO.getEndTime() == null ? null : pageDTO.getEndTime());
+        queryMap.put("planTypeStatus", pageDTO.getPlan_type_status() == null ? 0 : pageDTO.getPlan_type_status());
+        queryMap.put("companyId", StringUtils.isBlank(pageDTO.getCompany_id()) ? null : pageDTO.getCompany_id());
+        queryMap.put("purchaseType", pageDTO.getPurchase_type() == null ? null : pageDTO.getPurchase_type());
+        List<PurchaseInformationPO> purchaseInformationList = purchaseInformationDAO.getPurchaseInformationByPage(queryMap);
+        List<PurchaseInformationVO> out = POUtil.convert(purchaseInformationList, PurchaseInformationVO.class, TypeTokens.PurchaseInformationTypeVO);
+        int totalNum = purchaseInformationDAO.getPurchaseInformationListCount(queryMap);
+        return new Page<PurchaseInformationVO>(pageNum, pageSize, totalNum, out);
+    }
+
+    /**
+     * 
+     */
+    @Override
+    public List<PurchaseInformationVO> getPurchaseInformationList(PurchaseInformationDTO pDto) {
+        HashMap<String, Object> queryMap = new HashMap<String, Object>();
+        queryMap.put("id", pDto.getId());
+        queryMap.put("demandNumber", StringUtils.isBlank(pDto.getDemand_number()) ? null : pDto.getDemand_number());
+        queryMap.put("createName", StringUtils.isBlank(pDto.getCreate_name()) ? null : pDto.getCreate_name());
+        queryMap.put("planTypeStatus", pDto.getPlan_type_status() == null ? 0 : pDto.getPlan_type_status());
+        queryMap.put("companyId", StringUtils.isBlank(pDto.getCompany_id()) ? null : pDto.getCompany_id());
+        queryMap.put("purchaseType", pDto.getPurchase_type() == null ? null : pDto.getPurchase_type());
+        List<PurchaseInformationPO> purchaseInformationList = purchaseInformationDAO.getPurchaseInformationList(queryMap);
+        List<PurchaseInformationVO> out = POUtil.convert(purchaseInformationList, PurchaseInformationVO.class, TypeTokens.PurchaseInformationTypeVO);
+        return out;
+    }
+
+    @Override
+    public Long createNewInformation(PurchaseInformationDTO inst) {
+        PurchaseInformationPO po = POUtil.convert(inst, PurchaseInformationPO.class);
+        Long createNewInformation = purchaseInformationDAO.createNewInformation(po);
+        if (createNewInformation > 0) {
+            return po.getId();
+        }
+        return createNewInformation;
+    }
+
+}

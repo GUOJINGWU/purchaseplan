@@ -1,0 +1,28 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta content="text/html;charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<!-- 		<link th:href="@{/bootstrap/3.3.1/css/bootstrap.min.css}" rel="stylesheet" />
+		<link th:href="@{/bootstrap/3.3.1/css/bootstrap-theme.min.css}"	rel="stylesheet" /> -->
+</head>
+<body>
+	Hello thymeleaf!
+	<table class="table table-hover">
+		<tr>
+			<th>ID</th>
+			<th>类型名称</th>
+			<th>级别</th>
+			<th>父级ID</th>
+			<th>类型编码</th>
+		</tr>
+		<tr th:each="subtype:${subtypeList}">
+			<td th:text="${subtype.id}"></td>
+			<td th:text="${subtype.name}"></td>
+			<td th:text="${subtype.rank}"></td>
+			<td th:text="${subtype.pid}"></td>
+			<td th:text="${subtype.code}"></td>
+		</tr>
+	</table>
+</body>
+</html>

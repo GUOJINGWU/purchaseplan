@@ -1,0 +1,18 @@
+package com.youzhicai.purchaseplan.dao;
+
+import java.util.HashMap;
+import java.util.List;
+
+import com.youzhicai.purchaseplan.po.PurchaseRecipientPO;
+
+public interface PurchaseRecipientDAO {
+
+    public int savePurchaseRecipientList(List<PurchaseRecipientPO> purchaseRecipientList);
+
+    public List<PurchaseRecipientPO> getPurchaseRecipientList(HashMap<String, Object> hashMap);
+
+    public int removePurchaseRecipientById(Long id);
+
+    public int removePurchaseRecipientByInformationId(Long informationId);
+
+}

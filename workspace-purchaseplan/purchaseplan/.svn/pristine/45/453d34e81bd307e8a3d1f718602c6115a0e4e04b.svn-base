@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace的值就是dao接口的完整路径 -->
+<mapper namespace="com.youzhicai.purchaseplan.dao.PurchaseInformationDAO">
+	<sql id="information_columns_withoutID">
+		demand_number,plan_type_status,plan_type_value,emergency_cause,instruction_manual,attachment_id,
+		create_id,create_name,start_time,create_time,company_id,company_name,department_id,department_name,purchase_type
+	</sql>
+
+	<sql id="information_columns">
+		id,
+		<include refid="information_columns_withoutID" />
+	</sql>
+
+	<insert id="savePurchaseInformation" parameterType="com.youzhicai.purchaseplan.po.PurchaseInformationPO">
+		INSERT INTO t_sppurchase_information(
+		<include refid="information_columns_withoutID" />
+		)
+		VALUES(#{demand_number},#{plan_type_status},#{plan_type_value},#{emergency_cause},#{instruction_manual},#{attachment_id},#{create_id},
+		#{create_name},#{start_time},#{create_time},#{company_id},#{company_name},#{department_id},#{department_name},#{purchase_type})
+	</insert>
+
+	<select id="getPurchaseInformationListCount" resultType="int">
+		select
+		count(1) from t_sppurchase_information
+		where 1=1
+		<if test="demandNumber != null and demandNumber != '' ">
+			AND demand_number = #{demandNumber}
+		</if>
+		<if test="createName != null and createName != '' ">
+			AND create_name = #{createName}
+		</if>
+		<if test="startTime != null and startTime != '' ">
+			AND start_time &gt;= #{startTime}
+		</if>
+		<if test="endTime != null and endTime != '' ">
+			AND start_time &lt;= #{endTime}
+		</if>
+		<if test="planTypeStatus != null and planTypeStatus != '' ">
+			AND plan_type_status = #{planTypeStatus}
+		</if>
+		<if test="companyId != null and companyId != '' ">
+			AND company_id = #{companyId}
+		</if>
+		<if test="purchaseType != null and purchaseType != '' ">
+			AND purchase_type = #{purchaseType}
+		</if>
+		ORDER BY id DESC
+		LIMIT #{pageNum},#{pageSize}
+	</select>
+
+	<select id="getPurchaseInformationByPage" resultType="com.youzhicai.purchaseplan.vo.PurchaseInformationVO">
+		SELECT
+		<include refid="information_columns"></include>
+		FROM t_sppurchase_information
+		WHERE 1=1
+		<if test="demandNumber != null and demandNumber != '' ">
+			AND demand_number = #{demandNumber}
+		</if>
+		<if test="createName != null and createName != '' ">
+			AND create_name = #{createName}
+		</if>
+		<if test="startTime != null and startTime != '' ">
+			AND start_time &gt;= #{startTime}
+		</if>
+		<if test="endTime != null and endTime != '' ">
+			AND start_time &lt;= #{endTime}
+		</if>
+		<if test="planTypeStatus != null and planTypeStatus != '' ">
+			AND plan_type_status = #{planTypeStatus}
+		</if>
+		<if test="companyId != null and companyId != '' ">
+			AND company_id = #{companyId}
+		</if>
+		<if test="purchaseType != null and purchaseType != '' ">
+			AND purchase_type = #{purchaseType}
+		</if>
+		ORDER BY id DESC
+		LIMIT #{pageNum},#{pageSize}
+	</select>
+
+	<select id="getPurchaseInformationList" resultType="com.youzhicai.purchaseplan.vo.PurchaseInformationVO">
+		SELECT
+		<include refid="information_columns"></include>
+		FROM t_sppurchase_information
+		WHERE 1=1
+		<if test="demandNumber != null and demandNumber != '' ">
+			AND id =#{id}
+		</if>
+		<if test="demandNumber != null and demandNumber != '' ">
+			AND demand_number = #{demandNumber}
+		</if>
+		<if test="createName != null and createName != '' ">
+			AND create_name = #{createName}
+		</if>
+		<if test="planTypeStatus != null and planTypeStatus != '' ">
+			AND plan_type_status = #{planTypeStatus}
+		</if>
+		<if test="companyId != null and companyId != '' ">
+			AND company_id = #{companyId}
+		</if>
+		<if test="purchaseType != null and purchaseType != '' ">
+			AND purchase_type = #{purchaseType}
+		</if>
+		ORDER BY id DESC
+	</select>
+
+</mapper>

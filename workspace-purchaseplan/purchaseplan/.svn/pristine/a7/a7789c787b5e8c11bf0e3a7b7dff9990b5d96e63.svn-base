@@ -1,0 +1,67 @@
+package com.youzhicai.purchaseplan.web.entity;
+
+public class GoodsInpathModel {
+    private String pageNum;
+    private String pageSize;
+    private String nameOrCode;
+    private String firstRankId;
+    private String secondRankId;
+    private String thirdRankId;
+    private String companyId;
+
+    public String getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(String pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public String getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(String pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public String getNameOrCode() {
+        return nameOrCode;
+    }
+
+    public void setNameOrCode(String nameOrCode) {
+        this.nameOrCode = nameOrCode;
+    }
+
+    public String getFirstRankId() {
+        return firstRankId;
+    }
+
+    public void setFirstRankId(String firstRankId) {
+        this.firstRankId = firstRankId;
+    }
+
+    public String getSecondRankId() {
+        return secondRankId;
+    }
+
+    public void setSecondRankId(String secondRankId) {
+        this.secondRankId = secondRankId;
+    }
+
+    public String getThirdRankId() {
+        return thirdRankId;
+    }
+
+    public void setThirdRankId(String thirdRankId) {
+        this.thirdRankId = thirdRankId;
+    }
+
+    public String getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(String companyId) {
+        this.companyId = companyId;
+    }
+}

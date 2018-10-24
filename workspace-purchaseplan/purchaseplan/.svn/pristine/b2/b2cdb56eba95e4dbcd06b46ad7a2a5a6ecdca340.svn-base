@@ -1,0 +1,40 @@
+package com.youzhicai.purchaseplan.web.controller;
+
+import java.io.File;
+import java.io.IOException;
+
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.ResourceUtils;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.youzhicai.purchaseplan.web.util.ConfigUtil;
+
+@RestController
+@RequestMapping(value = "web/file")
+public class FileController {
+    /**
+     * 通用文件下载
+     * @param fileName
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping("/download")
+    public ResponseEntity<InputStreamResource> getFile(String fileName) throws IOException {
+        File files = ResourceUtils.getFile(ResourceUtils.CLASSPATH_URL_PREFIX + ConfigUtil.getValue("downloeadPath") + fileName);
+        FileSystemResource file = new FileSystemResource(files);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+        headers.add("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getFilename()));
+        headers.add("Pragma", "no-cache");
+        headers.add("Expires", "0");
+
+        return ResponseEntity.ok().headers(headers).contentLength(file.contentLength()).contentType(MediaType.parseMediaType("application/octet-stream"))
+                .body(new InputStreamResource(file.getInputStream()));
+    }
+
+}

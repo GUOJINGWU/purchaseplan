@@ -1,0 +1,14 @@
+package com.youzhicai.purchaseplan.web.service;
+
+import com.youzhicai.purchaseplan.vo.PageListVO;
+import com.youzhicai.purchaseplan.vo.PurchasePlanListVO;
+import com.youzhicai.purchaseplan.web.entity.GoodsInpathModel;
+import com.youzhicai.purchaseplan.web.entity.GoodsOutModel;
+import com.youzhicai.purchaseplan.web.entity.GoodsTypeModel;
+
+public interface MaterialstoreService {
+
+    public PageListVO<PurchasePlanListVO> getPurchasePlanList(GoodsInpathModel goodsInpathModel);
+
+    public GoodsOutModel<GoodsTypeModel> getGoodsType(Integer pid, String companyId);
+}

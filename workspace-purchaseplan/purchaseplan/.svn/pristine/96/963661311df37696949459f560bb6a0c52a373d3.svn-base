@@ -1,0 +1,54 @@
+package com.youzhicai.purchaseplan.web.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.youzhicai.purchaseplan.web.entity.PairModel;
+import com.youzhicai.purchaseplan.web.util.ConfigUtil;
+
+/**
+ * 概况页面跳转
+ * 
+ * @ClassName: ProfilePageController
+ * @author: xia.nan
+ * @date: 2018年10月9日 下午4:22:07
+ *
+ *
+ */
+@Controller
+@RequestMapping("profilepage")
+public class ProfilePageController {
+
+    /**
+     * 概况主页面
+     * @Title: index
+     * @param: @param model
+     * @param: @return
+     * @return: String
+     * @throws
+     */
+    @RequestMapping("index")
+    public String index(Model model) {
+        String currentProjectURL = ConfigUtil.getValue("currentProjectURL");
+        System.err.println("currentProjectURL--->" + currentProjectURL);
+        List<PairModel> pairList = new ArrayList<PairModel>();
+        PairModel p1 = new PairModel();
+        p1.setKey("需求计划发起");
+        p1.setValue(currentProjectURL + "/purchaseplan/index");
+        PairModel p2 = new PairModel();
+        p2.setKey("需求计划汇总");
+        p2.setValue(currentProjectURL + "/profilepagesummary/index");
+        PairModel p3 = new PairModel();
+        p3.setKey("采购计划");
+        p3.setValue(currentProjectURL + "/singleoffline/index");
+        pairList.add(p1);
+        pairList.add(p2);
+        pairList.add(p3);
+        model.addAttribute("pairList", pairList);
+        return "profilePage/profilePage";
+    }
+}

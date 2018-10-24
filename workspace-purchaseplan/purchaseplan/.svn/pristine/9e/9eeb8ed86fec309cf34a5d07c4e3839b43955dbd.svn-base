@@ -1,0 +1,7 @@
+package com.youzhicai.purchaseplan.dto;
+
+import com.youzhicai.purchaseplan.entity.PurchaseInformation;
+
+public class PurchaseInformationDTO extends PurchaseInformation {
+
+}

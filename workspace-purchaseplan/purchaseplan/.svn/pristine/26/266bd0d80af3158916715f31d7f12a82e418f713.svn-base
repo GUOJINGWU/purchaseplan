@@ -1,0 +1,76 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>demo</title>
+<link rel="stylesheet" th:href="@{/res/layui/css/layui.css}" />
+<link rel="stylesheet" th:href="@{/res/css/global.css}" />
+<link rel="stylesheet" th:href="@{/res/css/ui-dialog.css}" />
+<link rel="stylesheet" th:href="@{/res/css/source.css}" />
+<link rel="stylesheet" th:href="@{/res/css/plan.css}" />
+</head>
+<div th:include="default/yzcheader :: header"></div>
+<body class="yzc-skin-buyer">
+	<div class="yzc-frame-loading"></div>
+	<div class="yzc-frame-top"></div>
+	<div class="yzc-frame-center">
+		<div class="yzc-frame-right">
+			<div class="yzc-frame-body">
+				<div class="main-container">
+					<div class="editGoodsBtnCon">
+						<a href="javascript:test1();" class="plan-radius-btn  plan-choose-member">弹出页1</a>
+						<a href="javascript:test2();" class="plan-radius-btn  plan-choose-member">弹出页2</a>
+						<a href="javascript:test3();" class="plan-radius-btn  plan-choose-member">弹出页3</a>
+						<a href="javascript:test4();" class="plan-radius-btn  plan-choose-member">是否确认</a>
+						<a href="javascript:test5();" class="plan-radius-btn  plan-choose-member">弹窗</a>
+						<a href="javascript:test6();" class="plan-radius-btn  plan-choose-member">文件下载</a>
+					</div>
+				</div>
+				<div class="yui-title-c yui-clearfix">
+					<h4 class="yui-title-first yui-fl">需求附件1</h4>
+				</div>
+				<div class="layui-form-item layui-form-text" style="padding-top: 20px">
+					<label class="plan-label">需求附件:</label>
+					<a href="javascript:addMember();" class="plan-radius-btn plan-choose-member"><img alt="" th:src="@{/res/images/iconsUpload.png}"/>上传附件</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<input type="hidden" id="currentProjectURL" th:value="${currentProjectURL}" />
+	<script th:src="@{/res/js/jquery.js}" type="text/javascript"></script>
+	<script th:src="@{/res/util/dialog-plus-min.js}" type="text/javascript"></script>
+	<script th:src="@{/res/util/purchaseplanCommon.js}" type="text/javascript"></script>
+	<script type="text/javascript">
+		function test1() {
+			AlertSucMessage('操作成功');
+		}
+
+		function test2() {
+			AlertErrorMessage('错误提示');
+		}
+
+		function test3() {
+			AlertWarnMessage('警告提示');
+		}
+
+		function test4() {
+			confirmDialog("确认提交", "确认提交？", function() {
+				alert("确认提交回调信息");
+			});
+		}
+
+		function test5() {
+			var currentProjectURL = $("#currentProjectURL").val();
+			OpenSimpleUrl("DEMO2", "DEMO测试", currentProjectURL + "/pageJump", '540px', '416px');
+		}
+
+		function test6() {
+			var currentProjectURL = $("#currentProjectURL").val();
+			window.open(currentProjectURL + '/download/getfile?fileName=planEcxel.xls');
+		}
+
+		function test7() {
+			alert("文件上传")
+		}
+	</script>
+</body>
+</html>

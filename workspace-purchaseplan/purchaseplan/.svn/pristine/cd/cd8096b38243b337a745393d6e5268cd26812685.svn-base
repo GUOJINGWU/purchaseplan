@@ -1,0 +1,18 @@
+package com.youzhicai.purchaseplan.dao;
+
+import java.util.HashMap;
+import java.util.List;
+
+import com.youzhicai.purchaseplan.po.PurchasePlanListPO;
+
+public interface PurchasePlanListDAO {
+
+    public int savePurchasePlanList(List<PurchasePlanListPO> planListPO);
+
+    public List<PurchasePlanListPO> getPurchasePlanList(HashMap<String, Object> hashMap);
+
+    public int removePurchasePlanListById(HashMap<String, Object> hashMap);
+
+    public int removePurchasePlanListByinformationId(HashMap<String, Object> hashMap);
+
+}

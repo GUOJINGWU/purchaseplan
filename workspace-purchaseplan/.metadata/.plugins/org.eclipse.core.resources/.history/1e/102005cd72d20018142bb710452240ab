@@ -1,0 +1,35 @@
+
+ 	/*点击加减号*/
+ 	function editNumber(){
+ 		$(".num-jia").click(function(){
+ 			var inputNum = $(this).siblings().find(".input-num");
+ 			$()
+ 		})
+	 	var num_jia = document.getElementById("jian");
+	      var num_jian = document.getElementById("jia");
+	      var input_num = document.getElementById("inputId");
+	
+	      num_jia.onclick = function () {
+	
+	          input_num.value = parseInt(input_num.value) + 1;
+	      };
+	
+	      num_jian.onclick = function () {
+	
+	          if (input_num.value <= 0) {
+	              input_num.value = 0;
+	          } else {
+	
+	              input_num.value = parseInt(input_num.value) - 1;
+	          }
+	
+	      }
+ 		
+ 		
+ 	}
+ 	editNumber();
+ 	
+ 	
+ 	
+ 	
+

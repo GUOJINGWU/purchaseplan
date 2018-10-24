@@ -1,0 +1,110 @@
+// 打开新弹窗
+function OpenSimpleUrl(id, title, url, width, height) {
+
+	d = dialog({
+		id : id,
+		title : title,
+		url : url,
+		fixed : true,
+		width : width,
+		height : height
+	});
+
+	d.showModal();
+}
+
+// 弹出成功提示对话框
+function AlertSucMessage(cont, fun) {
+	var SucCont = "<div class='yzc-box'><i class='yzc-box-confirm'></i><span>"+cont+"</span></div>";
+	var D = dialog({
+		title : "提示信息",
+		content : SucCont,
+		fixed : true,
+		Icon : 'IconWrong',
+		width : 540,
+		height : 350 - 105
+	});
+
+	D.showModal();
+
+	setTimeout(function() {
+		D.close();
+		if (fun) {
+			fun();
+		}
+	}, 1000);
+}
+
+// 统一消息提醒-错误提示
+function AlertErrorMessage(cont) {
+	var ErrorCont = "<div class=\"icon warnIcon icon-error\"><i></i></div>";
+	ErrorCont += " <div class=\"warnTest\">" + cont + "</div>";
+	ErrorCont += "<div class=\"\"></div>";
+
+	var D = dialog({
+		title : "提示信息",
+		content : ErrorCont,
+		fixed : true,
+		Icon : 'IconWrong',
+		width : 480,
+		height : 200,
+		cancelValue : "关闭",
+		cancel : true
+	});
+
+	D.showModal();
+}
+
+// 弹出警告信息提示框
+function AlertWarnMessage(cont) {
+
+	var WarnCont = "<div class=\"icon warnIcon icon-warning\"><i></i></div>";
+	WarnCont += "<div class=\"warnTest\">" + cont + "</div>";
+	WarnCont += " <div class=\"\"></div>";
+
+	var D = dialog({
+		title : "提示信息",
+		content : WarnCont,
+		fixed : true,
+		width : 480,
+		height : 200,
+		Icon : 'IconWaring',
+		cancelValue : "关闭",
+		cancel : true
+	});
+	D.showModal();
+}
+
+// 关闭指定的弹出对话框
+function CloseDialog(id) {
+	if (dialog.list[id]) {
+		dialog.list[id].close().remove();
+		if (top.$("iframe[name='" + id + "']"))
+			top.$("iframe[name='" + id + "']").remove();
+	}
+}
+
+// 统一提示是否确认删除
+function confirmDialog(title, cont, fun) {
+	var WarnTitle = '<div class=/"title/">' + title + '</div>';
+	var WarnCont = '<div class=/"contentText/"><div class=/"contentTitle/">' + cont + '</div></div>';
+
+	var D = dialog({
+		title : WarnTitle,
+		content : WarnCont,
+		okValue : "确定",
+		ok : function() {
+			if (fun) {
+				fun();
+			}
+		},
+		cancelValue : "取消",
+		cancel : true,
+		fixed : true,
+		width : 480,
+		height : 200,
+		Icon : 'IconWaring'
+	});
+
+	D.showModal();
+}

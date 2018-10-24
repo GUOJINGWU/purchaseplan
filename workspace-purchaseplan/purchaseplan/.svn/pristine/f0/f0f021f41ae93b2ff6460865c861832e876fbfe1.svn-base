@@ -1,0 +1,49 @@
+package com.youzhicai.purchaseplan.dto;
+
+import java.util.Date;
+
+import com.youzhicai.purchaseplan.entity.PurchaseInformation;
+
+public class PurchaseInformationPageDTO extends PurchaseInformation {
+    /** 第几页 **/
+    private int pageNum;
+    /** 每页记录数 **/
+    private int pageSize;
+    /** 开始时间 **/
+    private Date startTime;
+    /** 截至时间 **/
+    private Date endTime;
+
+    public int getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+}

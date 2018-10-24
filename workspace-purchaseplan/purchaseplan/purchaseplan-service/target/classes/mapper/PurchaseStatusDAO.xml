@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace的值就是dao接口的完整路径 -->
+<mapper namespace="com.youzhicai.purchaseplan.dao.PurchaseStatusDAO">
+	<sql id="status_columns_withoutID">
+		node_status
+	</sql>
+	<sql id="status_columns">
+		information_id,
+		<include refid="status_columns_withoutID" />
+	</sql>
+
+	<insert id="savePurchaseStatus" parameterType="java.util.List">
+		INSERT INTO t_sppurchase_status(information_id, node_status)
+		VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.information_id},#{item.node_status})
+		</foreach>
+	</insert>
+
+	<select id="getPurchaseStatusList" resultType="com.youzhicai.purchaseplan.vo.PurchaseStatusVO">
+		SELECT
+		<include refid="status_columns"></include>
+		FROM t_sppurchase_status
+		WHERE 1=1
+		<if test="informationId != null and informationId != '' ">
+			AND information_id = #{informationId}
+		</if>
+		ORDER BY information_id DESC;
+	</select>
+
+	<delete id="removePurchaseStatusByInformationId"
+		parameterType="Long">
+		DELETE
+		FROM t_sppurchase_status WHERE information_id =
+		#{informationId};
+	</delete>
+</mapper>

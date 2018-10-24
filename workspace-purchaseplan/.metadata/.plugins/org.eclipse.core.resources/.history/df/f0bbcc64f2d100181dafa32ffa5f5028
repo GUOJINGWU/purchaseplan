@@ -1,0 +1,81 @@
+ layui.use(['form', 'table', 'laypage', 'layer'], function () {
+        var laypage = layui.laypage,
+                form = layui.form,
+                table = layui.table,
+                layer = layui.layer;
+
+    });
+ 
+ 	function editNumber(jian,jia,inputId){
+ 		
+ 		var num_jia = document.getElementById("jian");
+      var num_jian = document.getElementById("jia");
+      var input_num = document.getElementById("inputId");
+
+      num_jia.onclick = function () {
+
+          input_num.value = parseInt(input_num.value) + 1;
+      };
+
+      num_jian.onclick = function () {
+
+          if (input_num.value <= 0) {
+              input_num.value = 0;
+          } else {
+
+              input_num.value = parseInt(input_num.value) - 1;
+          }
+
+      }
+ 		
+ 		
+ 	}
+ 	editNumber(num-jia,num-jian,input-num);
+ 	
+ 	
+
+ 	//点击加减号
+    $(function () {
+//        var num_jia = document.getElementById("num-jia");
+//        var num_jian = document.getElementById("num-jian");
+//        var input_num = document.getElementById("input-num");
+//
+//        num_jia.onclick = function () {
+//
+//            input_num.value = parseInt(input_num.value) + 1;
+//        };
+//
+//        num_jian.onclick = function () {
+//
+//            if (input_num.value <= 0) {
+//                input_num.value = 0;
+//            } else {
+//
+//                input_num.value = parseInt(input_num.value) - 1;
+//            }
+//
+//        }
+    });
+
+    $(function () {
+//        var num_jia1 = document.getElementById("num-jia1");
+//        var num_jian1 = document.getElementById("num-jian1");
+//        var input_num1 = document.getElementById("input-num1");
+//
+//        num_jia1.onclick = function () {
+//
+//            input_num1.value = parseInt(input_num1.value) + 1;
+//        };
+//
+//        num_jian1.onclick = function () {
+//
+//            if (input_num1.value <= 0) {
+//                input_num1.value = 0;
+//            } else {
+//
+//                input_num1.value = parseInt(input_num1.value) - 1;
+//            }
+//
+//        }
+    });
+

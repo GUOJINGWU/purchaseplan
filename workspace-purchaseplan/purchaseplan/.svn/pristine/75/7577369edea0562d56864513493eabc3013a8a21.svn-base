@@ -1,0 +1,9 @@
+package com.youzhicai.purchaseplan.web.service;
+
+import com.youzhicai.purchaseplan.web.entity.GoodsInpathModel;
+import com.youzhicai.purchaseplan.web.entity.GoodsOutModel;
+
+public interface MaterialstoreService {
+
+    public GoodsOutModel getGoodsListForSearch(GoodsInpathModel model);
+}

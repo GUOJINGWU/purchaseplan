@@ -1,0 +1,95 @@
+package com.youzhicai.purchaseplan.service.impl;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.youzhicai.purchaseplan.common.constant.TypeTokens;
+import com.youzhicai.purchaseplan.common.util.POUtil;
+import com.youzhicai.purchaseplan.dao.PurchaseGoodsSupplyDAO;
+import com.youzhicai.purchaseplan.dao.PurchasePlanListDAO;
+import com.youzhicai.purchaseplan.dto.PurchaseGoodsSupplyDTO;
+import com.youzhicai.purchaseplan.dto.PurchasePlanListDTO;
+import com.youzhicai.purchaseplan.enums.BasicEnums;
+import com.youzhicai.purchaseplan.po.PurchaseGoodsSupplyPO;
+import com.youzhicai.purchaseplan.po.PurchasePlanListPO;
+import com.youzhicai.purchaseplan.service.PurchasePlanListService;
+import com.youzhicai.purchaseplan.vo.PurchaseGoodsSupplyVO;
+import com.youzhicai.purchaseplan.vo.PurchasePlanListVO;
+
+@Service
+public class PurchasePlanListServiceImpl implements PurchasePlanListService {
+
+    @Autowired
+    private PurchasePlanListDAO purchasePlanListDAO;
+
+    @Autowired
+    private PurchaseGoodsSupplyDAO purchaseGoodsSupplyDAO;
+
+    @Override
+    public int savePurchasePlanList(List<PurchasePlanListDTO> planListDTO) {
+        if (planListDTO.size() == 0) {
+            return 0;
+        }
+        List<PurchasePlanListPO> poList = POUtil.convert(planListDTO, PurchasePlanListPO.class, TypeTokens.PurchasePlanListTypePO);
+        for (PurchasePlanListPO po : poList) {
+            if (po.getPlan_status() == null) {
+                po.setPlan_status(BasicEnums.DEFAULT.getStatus());
+            }
+        }
+        int rst = purchasePlanListDAO.savePurchasePlanList(poList);
+        return rst;
+    }
+
+    @Override
+    public List<PurchasePlanListVO> getPurchasePlanList(PurchasePlanListDTO planListDTO) {
+        HashMap<String, Object> hashMap = new HashMap<String, Object>();
+        hashMap.put("id", planListDTO.getId() == null ? null : planListDTO.getId());
+        hashMap.put("informationId", planListDTO.getInformation_id() == null ? null : planListDTO.getInformation_id());
+        List<PurchasePlanListPO> purchasePlanList = purchasePlanListDAO.getPurchasePlanList(hashMap);
+        List<PurchasePlanListVO> out = POUtil.convert(purchasePlanList, PurchasePlanListVO.class, TypeTokens.PurchasePlanListTypeVO);
+        List<PurchaseGoodsSupplyPO> purchaseGoodsSupplyList = purchaseGoodsSupplyDAO.getPurchaseGoodsSupplyList(hashMap);
+        List<PurchaseGoodsSupplyVO> goodsSupplyList = POUtil.convert(purchaseGoodsSupplyList, PurchaseGoodsSupplyVO.class,
+                TypeTokens.PurchaseGoodsSupplyTypeVO);
+        for (PurchasePlanListVO plan : out) {
+            List<PurchaseGoodsSupplyVO> goodsList = new ArrayList<PurchaseGoodsSupplyVO>();
+            for (PurchaseGoodsSupplyVO vo : goodsSupplyList) {
+                if (plan.getGoods_id() == vo.getGoods_id()) {
+                    goodsList.add(vo);
+                }
+            }
+            plan.setGoodsSupplyList(goodsList);
+        }
+        return out;
+    }
+
+    @Override
+    public int removePurchasePlanListById(Long id) {
+        if (id == null) {
+            return 0;
+        }
+        return purchasePlanListDAO.removePurchasePlanListById(id);
+    }
+
+    @Override
+    public int removePurchasePlanListByInformationId(Long informationId) {
+        if (informationId == null) {
+            return 0;
+        }
+        return purchasePlanListDAO.removePurchasePlanListByinformationId(informationId);
+    }
+
+    @Override
+    public int saveGoodsSupply(List<PurchaseGoodsSupplyDTO> purchaseGoodsSupply) {
+        if (purchaseGoodsSupply.size() == 0) {
+            return 0;
+        }
+        List<PurchaseGoodsSupplyPO> poList = POUtil.convert(purchaseGoodsSupply, PurchaseGoodsSupplyPO.class, TypeTokens.PurchaseGoodsSupplyTypePO);
+        purchaseGoodsSupplyDAO.removePurchaseGoodsSupplyByGoodsId(poList);
+        return purchaseGoodsSupplyDAO.savePurchaseGoodsSupply(poList);
+    }
+
+}

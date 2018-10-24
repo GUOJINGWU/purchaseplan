@@ -1,0 +1,22 @@
+package com.youzhicai.purchaseplan.web.common;
+
+public enum BasicEnum {
+    /** 通用状态 **/
+    DEFAULTSTATE(0, "未提交"), COMPLETED(1, "已完成"), UNCONFIRMED(2, "待确认"), FAILURE(3, "已退回"), ONGOING(4, "进行中");
+    private int status;
+    private String value;
+
+    private BasicEnum(int status, String value) {
+        this.status = status;
+        this.value = value;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+}

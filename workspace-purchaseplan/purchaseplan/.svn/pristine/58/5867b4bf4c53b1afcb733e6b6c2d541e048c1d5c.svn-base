@@ -1,0 +1,106 @@
+$(function() {
+	layui.use([ 'form' ], function() {
+		var form = layui.form();
+		form.on('radio(plan-type)', function(data) {
+			if(data.value == 2){
+				console.log(data.value);
+				$('.emergency-item').show();
+				form.render();
+			}else if(data.value == 1){
+				console.log(data.value);
+				$('.emergency-item').hide();
+				form.render();
+			}
+		});
+	});
+});
+
+// 添加人员弹窗
+function addMember() {
+	var currentProjectURL = $("#currentProjectURL").val();
+	OpenSimpleUrl("add-people", "", currentProjectURL + "/pageJump", '640px', '416px');
+}
+
+// 添加物资弹窗
+function addMaterial() {
+	var currentProjectURL = $("#currentProjectURL").val();
+	var informationId = $("#informationId").val();
+	var purchasetype = $("#purchaseType").val();
+	OpenSimpleUrl("add-material", "", currentProjectURL + "/purchaseplan/addmaterial?informationId="+informationId+"&purchasetype="+purchasetype, '940px', '600px');
+}
+//批量导入弹窗
+function batchImport(){
+	var txt = '<div>'+
+					'<p style="text-align:center;padding:30px 0 50px 0;font-size: 18px;">批量导入物资</p>'+
+					'<div style="width:338px;height:32px;margin:0 auto">'+
+					'<input type="text" style="width:270px;height:32px;margin:0 auto;vertical-align: top;" />'+
+					'<button style="height:32px;border:none;background:#2d8ff7;color:#fff;width: 68px;border-radius: 2px;" onclick="upload.click()">附件<input type="file" id="upload" style="display: none" /></button>'+
+					'<p style="text-align:center;padding:10px 0 0 0;font-size: 14px;color:#9A9CA0">建议下载<a class="plan-a" style="display:inline-block;margin:0 5px">物资模板</a>按招平台格式上传物资</p>'+
+					'</div>'+
+					
+				'</div>';
+	confirmDialog("批量导入信息", txt, function() {
+		
+	});
+}
+//查看详情
+function watchDetail(){
+	var currentProjectURL = $("#currentProjectURL").val();
+	OpenSimpleUrl("watch-detail", "", currentProjectURL + "/pageJump2", '640px', '500px');
+}
+//选择供应商
+function supplierSelection(){
+	var txt = '<div style="padding: 10px;">'+
+	'<div style="width:465px;height:32px;margin:20px auto">'+
+	'<label style="margin-right:20px">供应商名称</label>'+
+	'<input type="text" class="search-input" style="width:270px;height:32px;margin:0 auto;" />'+
+	'<a class="plan-radius-btn" style="margin-left:20px">搜索</a>'+	
+	'</div>'+	
+	'<div style="height:262px;overflow-y:auto;">'+	
+	'<table class="layui-table">'+
+    '<colgroup>'+
+        '<col width="15%" />'+
+        '<col width="35%" />'+
+        '<col width="20%" />'+
+        
+    '</colgroup>'+
+    '<thead>'+
+        '<tr>'+
+            '<th class="yzc-aCenter">序号</th>'+
+            '<th class="yzc-aCenter">供应商名称</th>'+
+            '<th class="yzc-aCenter">操作</th>'+                                
+            
+        '</tr>'+
+    '</thead>'+
+    '<tbody>'+
+       '<tr>'+
+            '<td class="yzc-aCenter">1</td>'+
+            '<td class="yzc-aCenter supplier-name">供应商1</td>'+
+            '<td class="yzc-aCenter plan-a select-supplier" id="supplier1" onclick="toChoose1()">选择</td>'+
+         
+        '</tr>'+   
+        '<tr>'+
+        '<td class="yzc-aCenter">1</td>'+
+        '<td class="yzc-aCenter supplier-name">供应商2</td>'+
+        '<td class="yzc-aCenter plan-a select-supplier" id="supplier2"  onclick="toChoose2()">选择</td>'+
+     
+    '</tr>'+   
+    '</tbody>'+
+	'</table>'+
+	'</div>'+	
+	'</div>';
+confirmDialog("选择供应商", txt, function() {
+
+});
+}
+
+//选择供应商
+function toChoose1(){
+	var supplierName = $("#supplier1").siblings(".supplier-name").html();
+	$(".search-input").val(supplierName);
+}
+
+function toChoose2(){
+	var supplierName = $("#supplier2").siblings(".supplier-name").html();
+	$(".search-input").val(supplierName);
+}

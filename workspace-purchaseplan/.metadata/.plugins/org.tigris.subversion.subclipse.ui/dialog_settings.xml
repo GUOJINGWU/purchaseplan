@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="288" key="HistoryTableProvider.SVNHistoryPage.日期"/>
+	<item value="23" key="CommitDialog.location.y"/>
+	<item value="19" key="CommitDialog.location.x"/>
+	<item value="230" key="HistoryTableProvider.SVNHistoryPage.作者"/>
+	<item value="500" key="CommitDialog.weights.0"/>
+	<item value="576" key="HistoryTableProvider.SVNHistoryPage.注释"/>
+	<item value="500" key="CommitDialog.weights.1"/>
+	<item value="116" key="HistoryTableProvider.SVNHistoryPage.修订"/>
+	<item value="611" key="CommitDialog.size.y"/>
+	<item value="1563" key="CommitDialog.size.x"/>
+	<section name="CommitWizard">
+		<item value="500" key="VWeight2"/>
+		<item value="500" key="VWeight1"/>
+		<item value="false" key="ShowCompare"/>
+	</section>
+</section>

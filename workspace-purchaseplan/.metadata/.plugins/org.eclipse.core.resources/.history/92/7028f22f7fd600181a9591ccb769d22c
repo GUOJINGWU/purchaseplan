@@ -1,0 +1,28 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>查看</title>
+<link href="//cdn.ukzhicai.com/layui/css/layui.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" th:href="@{/res/css/dialog-content.css}" />
+<link rel="stylesheet" th:href="@{/res/css/global.css}" />
+<link rel="stylesheet" th:href="@{/res/css/ui-dialog.css}" />
+<script src="https://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="//cdn.ukzhicai.com/layui/layui.js"></script>
+</head>
+<body>
+	<div class="inner-content">
+		
+		<div style="height: 222px; overflow: auto">
+			
+		</div>
+		<p class="button-group">
+			<a class="plan-white-btn plan-margin-btn back-btn">返回</a>
+			<a class="plan-blue-btn sure-btn" id="success">确定</a>
+		</p>
+	</div>
+	
+	
+	
+	
+</body>
+</html>

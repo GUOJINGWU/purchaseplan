@@ -1,0 +1,31 @@
+package com.youzhicai.purchaseplan.web.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.youzhicai.purchaseplan.web.entity.GoodsOutModel;
+import com.youzhicai.purchaseplan.web.entity.GoodsTypeModel;
+import com.youzhicai.purchaseplan.web.service.MaterialstoreService;
+
+@RestController
+@RequestMapping(value = "materialstore")
+public class MaterialstoreController {
+
+    @Autowired
+    private MaterialstoreService service;
+
+    /**
+     * 
+     * @Title: getGoodsType
+     * @param pid
+     * @param companyId
+     * @return
+     * @return: GoodsOutModel<GoodsTypeModel>
+     */
+    @RequestMapping(value = "getgoodstype")
+    public GoodsOutModel<GoodsTypeModel> getGoodsType(Integer pid, String companyId) {
+        return service.getGoodsType(pid, companyId);
+    }
+
+}

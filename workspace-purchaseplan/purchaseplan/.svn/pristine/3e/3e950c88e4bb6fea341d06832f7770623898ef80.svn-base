@@ -1,0 +1,56 @@
+#访问路径
+server.context-path=^server.context-path^
+#端口号
+server.port=^server.port^
+
+spring.datasource.driver-class-name=^spring.datasource.driver-class-name^
+spring.datasource.url=^spring.datasource.url^
+spring.datasource.username=^spring.datasource.username^
+spring.datasource.password=^spring.datasource.password^
+spring.datasource.type=^spring.datasource.type^
+
+mybatis.mapper-locations=^mybatis.mapper-locations^
+
+######################### Druid连接池的配置信息  #################
+#初始化连接大小
+spring.druid.initialSize=^spring.druid.initialSize^
+#最小连接池数量
+spring.druid.minIdle=^spring.druid.minIdle^
+#最大连接池数量
+spring.druid.maxActive=^spring.druid.maxActive^
+#获取连接时最大等待时间，单位毫秒
+spring.druid.maxWait=^spring.druid.maxWait^
+#配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+spring.druid.timeBetweenEvictionRunsMillis=^spring.druid.timeBetweenEvictionRunsMillis^
+#配置一个连接在池中最小生存的时间，单位是毫秒
+spring.druid.minEvictableIdleTimeMillis=^spring.druid.minEvictableIdleTimeMillis^
+#测试连接
+spring.druid.validationQuery=^spring.druid.validationQuery^
+#申请连接的时候检测，建议配置为true，不影响性能，并且保证安全性
+spring.druid.testWhileIdle=^spring.druid.testWhileIdle^
+#获取连接时执行检测，建议关闭，影响性能
+spring.druid.testOnBorrow=^spring.druid.testOnBorrow^
+#归还连接时执行检测，建议关闭，影响性能
+spring.druid.testOnReturn=^spring.druid.testOnReturn^
+#是否开启PSCache，PSCache对支持游标的数据库性能提升巨大，oracle建议开启，mysql下建议关闭
+spring.druid.poolPreparedStatements=^spring.druid.poolPreparedStatements^
+#开启poolPreparedStatements后生效
+spring.druid.maxPoolPreparedStatementPerConnectionSize=^spring.druid.maxPoolPreparedStatementPerConnectionSize^
+#配置扩展插件，常用的插件有=>stat:监控统计  log4j:日志  wall:防御sql注入
+spring.druid.filters=^spring.druid.filters^
+#通过connectProperties属性来打开mergeSql功能;慢SQL记录
+spring.druid.connectionProperties=^spring.druid.connectionProperties^
+
+# DAO日志级别
+logging.level.com.youzhicai.purchaseplan.dao=^logging.level.com.youzhicai.purchaseplan.dao^
+
+# Actuator节点
+management.endpoints.web.exposure.include=^management.endpoints.web.exposure.include^
+
+## cloud
+# Eureka服务名称  
+spring.application.name=^spring.application.name^
+# 在注册中心中进行注册
+eureka.client.serviceUrl.defaultZone=^eureka.client.serviceUrl.defaultZone^
+
+serviceUsing=^serviceUsing^

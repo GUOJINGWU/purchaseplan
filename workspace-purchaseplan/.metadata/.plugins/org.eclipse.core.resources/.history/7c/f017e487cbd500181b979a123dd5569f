@@ -1,0 +1,46 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>需求计划单</title>
+<link rel="stylesheet" th:href="@{/res/css/global.css}" />
+<link rel="stylesheet" th:href="@{/res/css/source.css}" />
+<link rel="stylesheet" th:href="@{/res/css/ui-dialog.css}" />
+<link rel="stylesheet" th:href="@{/res/css/plan.css}" />
+<link rel="stylesheet" th:href="@{/res/css/dialog-content.css}" />
+<style type="text/css">
+body {
+	background-color: #fff;
+}
+</style>
+</head>
+<body>
+	<div>
+		<p style="text-align: center; padding: 30px 0 50px 0; font-size: 18px;">批量导入物资</p>
+		<div style="width: 338px; height: 32px; margin: 0 auto">
+			<input id="fileText" type="text" style="width: 270px; height: 32px; margin: 0 auto; vertical-align: top;" />
+			<input type="file" style="display: none" id="fileExcel" name="fileExcel" onchange="changeName()" />
+			<button style="height: 32px; border: none; background: #2d8ff7; color: #fff; width: 68px; border-radius: 2px; position: absolute;" onclick="fileExcel.click()">附件</button>
+			<p style="text-align: center; padding: 10px 0 0 0; font-size: 14px; color: #9A9CA0">
+				建议下载
+				<a class="plan-a" style="display: inline-block; margin: 0 5px" href="/web/file/download?fileName=planEcxel.xls">物资模板</a>
+				按招平台格式上传物资
+			</p>
+			<p class="button-group">
+				<a class="plan-white-btn plan-margin-btn back-btn">返回</a>
+				<a class="plan-blue-btn sure-btn">确定</a>
+			</p>
+		</div>
+	</div>
+	<input type="hidden" id="informationId" th:value="${informationId}" />
+	<input type="hidden" id="purchaseType" th:value="${purchaseType}" />
+	<script th:src="@{/res/js/jquery.js}" type="text/javascript"></script>
+	<script th:src="@{/res/js/Common.js}" type="text/javascript"></script>
+	<script th:src="@{/res/js/placeholder.js}" type="text/javascript"></script>
+	<script th:src="@{/res/util/dialog-plus-min.js}" type="text/javascript"></script>
+	<script th:src="@{/res/util/baseAttachment.js}" type="text/javascript"></script>
+	<script th:src="@{/res/util/purchaseplanCommon.js}" type="text/javascript"></script>
+	<script th:src="@{/res/js/plan.js}" type="text/javascript"></script>
+	<script th:src="@{/res/util/jquery-form.js}" type="text/javascript"></script>
+	<script th:src="@{/res/javascript/batchImportSheetJS.js}" type="text/javascript"></script>
+</body>
+</html>

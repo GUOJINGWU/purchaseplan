@@ -1,0 +1,18 @@
+package com.youzhicai.purchaseplan.vo;
+
+import com.youzhicai.purchaseplan.entity.PurchaseInformation;
+
+public class PurchaseInformationVO extends PurchaseInformation {
+
+    /** 基本状态 **/
+    private Integer nodestate;
+
+    public Integer getNodestate() {
+        return nodestate;
+    }
+
+    public void setNodestate(Integer nodestate) {
+        this.nodestate = nodestate;
+    }
+
+}

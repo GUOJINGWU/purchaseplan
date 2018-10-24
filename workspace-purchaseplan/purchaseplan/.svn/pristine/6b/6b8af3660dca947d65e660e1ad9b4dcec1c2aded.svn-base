@@ -1,0 +1,183 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>需求计划单</title>
+<link rel="stylesheet" th:href="@{/res/css/global.css}" />
+<link rel="stylesheet" th:href="@{/res/css/source.css}" />
+<link rel="stylesheet" th:href="@{/res/css/ui-dialog.css}" />
+<link rel="stylesheet" th:href="@{/res/css/plan.css}" />
+</head>
+<div th:include="default/yzcheader :: header"></div>
+<body class="yzc-skin-buyer">
+	<div class="yzc-frame-loading"></div>
+	<div class="yzc-frame-top"></div>
+	<div class="yzc-frame-center">
+		<div class="yzc-frame-right">
+			<div class="yzc-frame-body">
+				<div class="main-container">
+					<div class="loading-shade">
+						<img th:src="@{/res/images/loading.gif}" class="loading-gif" />
+					</div>
+					<div class="main-con-form source" style="padding-bottom: 0">
+						<div class="layui-tab layui-tab-card" lay-filter="supply" style="margin: 0px;">
+							<div class="main-content">
+								<h3 class="plan-need-list">需求计划单</h3>
+								<!--需求概况-->
+								<div class="demand-profile">
+									<div class="yui-title-c yui-clearfix  plan-title-c">
+										<h4 class="yui-title-first yui-fl">需求概况</h4>
+									</div>
+									<form class="layui-form plan-form" action="" style="padding-top: 20px">
+										<div class="layui-form-item plan-item">
+											<label class="plan-label">需求类型： </label>
+											<span th:text="${concentrated.value}" th:if="${purchasetype == concentrated.status}"></span>
+											<span th:text="${customize.value}" th:if="${purchasetype == customize.status}"></span>
+										</div>
+										<div class="layui-form-item plan-item">
+											<div class="layui-inline" style="width: 836px">
+												<label class="plan-label">
+													<span class="red-star">*</span>
+													需求编号：
+												</label>
+												<div class="layui-input-block layui-input2" style="display: inherit; margin-left: 0; position: relative;">
+													<div th:text="${purchaseinformationvo.demand_number}" style="width: 713px; display: inline-block;" class="layui-input insideInputWrapper-input input-clear"></div>
+												</div>
+											</div>
+										</div>
+										<div class="layui-form-item plan-item">
+											<label class="plan-label">
+												<span class="red-star">*</span>
+												计划类型：
+											</label>
+											<div class="layui-input-block" style="margin-left: 0px; display: inline-block;">
+												<input type="radio" name="plan_type_status" value="1" title="月度计划" th:checked="${purchaseinformationvo.plan_type_status == 1}" />
+												<input type="radio" name="plan_type_status" value="2" title="紧急计划" th:checked="${purchaseinformationvo.plan_type_status == 2}" />
+											</div>
+										</div>
+										<div class="layui-form-item plan-item" th:if="${purchasetype == customize.status}">
+											<div class="layui-inline" style="width: 860px">
+												<label class="plan-label">
+													<span class="red-star">*</span>
+													需求接收人：
+												</label>
+												<div class="layui-input-block layui-input2" style="display: inherit; margin-left: 0; position: relative;">
+													<div th:text="${purchaserecipient.recipient_name}" class="layui-input input-clear" style="width: 590px; display: inline-block;"></div>
+												</div>
+											</div>
+										</div>
+										<div class="layui-form-item layui-form-text emergency-item" th:if="${purchaseinformationvo.plan_type_status == 2}">
+											<label class="plan-label" style="float: left">
+												<span class="red-star">*</span>
+												紧急原因：
+											</label>
+											<div class="yui-input-wrapper yui-fl form-block layui-input-block" style="margin-left: 0; display: inline-flex; width: 713px; position: relative;">
+												<div class="textarea-control layui-textarea input-clear" th:text="${purchaseinformationvo.emergency_cause}"></div>
+											</div>
+										</div>
+									</form>
+								</div>
+								<!--需求计划-->
+								<div class="demand-plan">
+									<div class="yui-title-c yui-clearfix">
+										<h4 class="yui-title-first yui-fl">需求计划</h4>
+									</div>
+									<table class="layui-table" id="demandPlanSheetTable" th:fragment="demandPlanSheetTable">
+										<colgroup>
+											<col width="4%" />
+											<col width="9%" />
+											<col width="9%" />
+											<col width="9%" />
+											<col width="9%" />
+											<col width="9%" />
+											<col width="9%" />
+											<col width="9%" />
+											<col width="16%" />
+										</colgroup>
+										<thead>
+											<tr>
+												<th class="yzc-aCenter">序号</th>
+												<th class="yzc-aCenter">物资编号</th>
+												<th class="yzc-aCenter">物资名称</th>
+												<th class="yzc-aCenter">材质/品牌</th>
+												<th class="yzc-aCenter">规格/型号</th>
+												<th class="yzc-aCenter">其他属性</th>
+												<th class="yzc-aCenter">单位</th>
+												<th class="yzc-aCenter">补充说明</th>
+												<th class="yzc-aCenter">需求数量</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="list,listStat:${purchaseplanlist}" th:if="${purchaseplanlistsize != 0}">
+												<td class="yzc-aCenter" th:text="${listStat.count}"></td>
+												<td class="yzc-aCenter" th:text="${list.plan_coding}"></td>
+												<td class="yzc-aCenter" th:text="${list.plan_name}"></td>
+												<td class="yzc-aCenter" th:text="${list.plan_brand}"></td>
+												<td class="yzc-aCenter" th:text="${list.plan_specifications}"></td>
+												<td class="yzc-aCenter">
+													<p style="line-height: 25px" th:each="supply,supplyStat:${list.goodsSupplyList}" th:text="${supply.suppl_name}+':'+${supply.suppl_value}"></p>
+												</td>
+												<td class="yzc-aCenter" th:text="${list.plan_unit}"></td>
+												<td class="yzc-aCenter" th:text="${list.plan_manual}"></td>
+												<td class="yzc-aCenter" th:text="${list.plan_quantity}"></td>
+											</tr>
+											<tr th:if="${purchaseplanlistsize == 0}">
+												<td class="yzc-aCenter" colspan="10">暂无物资信息</td>
+											</tr>
+										</tbody>
+									</table>
+									<div class="layui-form-item layui-form-text">
+										<label class="plan-label" style="float: left">备注说明：</label>
+										<div class="yui-input-wrapper yui-fl form-block layui-input-block" style="margin-left: 0; display: inline-flex; width: 713px; position: relative;">
+											<div class="textarea-control layui-textarea input-clear" th:text="${purchaseinformationvo.instruction_manual}"></div>
+										</div>
+									</div>
+									<div class="layui-form-item plan-item">
+										<label class="plan-label" style="float: left">需求附件： </label>
+										<div class="yui-input-wrapper yui-fl">
+											<div id="uploadFilesView" class="detachmentList">
+												<ul th:each="list:${fileList}">
+													<li>
+														<a th:href="${list.downLoadUrl}">
+															<span th:text="${list.fileName}"></span>
+														</a>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+								<p class="button-group">
+									<a class="plan-reset-btn plan-margin-btn" href="/purchaseplan/index">返回</a>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="yzc-frame-bottom ">
+		<ul>
+			<li>
+				<a>网站首页</a>
+			</li>
+			<li>
+				<a>招标采购</a>
+			</li>
+			<li>
+				<a>企业采购</a>
+			</li>
+			<li>
+				<a>优采金融</a>
+			</li>
+			<li>
+				<a>帮助中心</a>
+			</li>
+			<li class="yzc-frame-nob">
+				<a>意见反馈</a>
+			</li>
+		</ul>
+		<p>Copyright©2016 优质采（北京）科技发展有限公司 版权所有 皖ICP备05004986号</p>
+	</div>
+</body>
+</html>

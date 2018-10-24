@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace的值就是dao接口的完整路径 -->
+<mapper namespace="com.youzhicai.purchaseplan.dao.MaterialstoreGoodsDAO">
+	<sql id="goods_columns_withoutID">
+		companyId,companyName,name,code,fullCode,tid,unit,brand,specifications,
+		remarks,link,used,status,createId,creator,createTime,updateId,
+		updator,updateTime
+	</sql>
+
+	<sql id="goods_columns">
+		id,
+		<include refid="goods_columns_withoutID"></include>
+	</sql>
+	<select id="getMaterialstoreGoodsById" resultType="com.youzhicai.purchaseplan.po.MaterialstoreGoodsPO"
+		parameterType="Map">
+		SELECT
+		<include refid="goods_columns"></include>
+		FROM
+		materialstore.goods
+		WHERE
+		1=1
+		<if test="id != null and id != '' ">
+			AND id = #{id}
+		</if>
+	</select>
+
+	<select id="getPurchaseGoodsSupply" resultType="com.youzhicai.purchaseplan.po.PurchaseGoodsSupplyPO"
+		parameterType="Map">
+		SELECT
+		a.gid as goods_id ,a.name as suppl_name,a.value as suppl_value
+		FROM
+		materialstore.goodssupply a
+		WHERE a.style = 1
+		AND a.status = 1
+		<if test="goodId != null and goodId != '' ">
+			AND a.gid = #{goodId}
+		</if>
+	</select>
+</mapper>

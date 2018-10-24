@@ -1,0 +1,72 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>退回</title>
+<link href="//cdn.ukzhicai.com/layui/css/layui.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" th:href="@{/res/css/dialog-content.css}" />
+
+</head>
+<body>
+	<div class="inner-content yzc-clearfix">
+	
+			
+			<form class="layui-form plan-form" action="" style="padding-top: 20px">
+				<div class="layui-form-item plan-item">
+				
+					<div class="layui-inline">
+						<label class="plan-label">需求编号： </label>
+						<span class="text-c">111</span>
+					</div>
+					<div class="layui-inline">
+						<label class="plan-label">需求类型： </label>
+						<span class="text-c">集中采购（月度计划）</span>
+					</div>
+					<div class="layui-inline">
+						<label class="plan-label">发起人： </label>
+						<span class="text-c">张建</span>
+					</div>
+					<div class="layui-inline">
+						<label class="plan-label">发起时间： </label>
+						<span class="text-c">2018-10-15 08:00:00</span>
+					</div>	
+											
+				</div>	
+				
+				<div class="layui-form-item" style="position:relative">
+
+
+	   		 			<div class="layui-inline" style="width: 464px">
+		        			<label class="plan-label" style="width: 110px !important;">采购类型：
+		       		 		</label>
+		        			<div class="layui-input-block" style="margin-left: 0px; display: inline-block;">
+								<input type="radio" name="plan_type_status" value="1" title="询价采购"  lay-filter="plan-type" />
+								<input type="radio" name="plan_type_status" value="2" title="企业招标"  lay-filter="plan-type" />
+								<input type="radio" name="plan_type_status" value="3" title="线下续单"  lay-filter="plan-type" />
+								
+							</div>
+						</div>
+					
+					</div>
+				
+				<div class="layui-form-item layui-form-text">
+										<label class="material-label">补充说明：</label>
+										<div class="yui-input-wrapper yui-fl form-block layui-input-block" style="margin-left: 0; display: inline-flex; width: 713px; position: relative;">
+											<textarea name="remarks" placeholder="请输入内容" class="textarea-control layui-textarea input-clear"></textarea>
+											<div class="textareaInputCounter yui-fcolor-9 remainder" style="position: absolute; right: 5px; bottom: 5px;">
+												<span class="remainder-number no-input-five">0</span>
+												/
+												<span class="maxNumber">250</span>
+											</div>
+										</div>
+				</div>						
+			</form>
+		
+		
+		
+	</div>
+	<script src="https://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="../../res/js/Common.js"></script>
+	<script type="text/javascript" src="//cdn.ukzhicai.com/layui/layui.js"></script>
+	
+</body>
+</html>

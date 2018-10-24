@@ -1,0 +1,71 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>发起项目</title>
+<link href="//cdn.ukzhicai.com/layui/css/layui.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" th:href="@{/res/css/dialog-content.css}" />
+<link rel="stylesheet" th:href="@{/res/css/global.css}" />
+<link rel="stylesheet" th:href="@{/res/css/ui-dialog.css}" />
+
+</head>
+<body>
+	<div class="inner-content">
+		
+		<div>
+			<form class="layui-form plan-form limit-form" action=""  style="padding-top: 20px">
+    
+					<div class="layui-form-item">
+							<div class="layui-inline" style="width: 470px">
+											<label class="plan-label">
+												<span class="red-star">*</span>
+												物资名称：
+											</label>
+											<div class="layui-input-block layui-input2" style="display: inherit; margin-left: 0; position: relative;">
+												<input name="name" lay-verify="title" autocomplete="off" class="layui-input insideInputWrapper-input input-clear" placeholder="请输入物资名称/编码" type="text" style="width: 240px; display: inline-block;" />
+												<div class="inputCounter yui-fcolor-9" style="position: absolute; left: 252px; top: 3px;">
+													(<span class="remainder-number no-input-one">0</span>/<span class="maxNumber">50</span>)
+												</div>
+											</div>
+							</div>			
+					
+					</div>
+		</form>
+		</div>
+		<p class="button-group" style="margin-top: 254px;">
+			<a class="plan-white-btn plan-margin-btn cancel-btn">取消</a>
+			<a class="plan-blue-btn sure-btn">确定</a>
+		</p>
+	</div>
+	<script src="https://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="../../res/js/Common.js"></script>
+	<script type="text/javascript" src="//cdn.ukzhicai.com/layui/layui.js"></script>
+	<script>
+	
+	layui.use([ 'form' ], function() {
+		var form = layui.form();
+		form.on('radio(plan-type)', function(data) {
+			
+		});
+	});
+	
+	
+	/* 点击取消 */
+	$(".cancel-btn").click(function() {
+		
+		top.CloseDialog("initiating-project");
+	});
+	    
+
+	/* 点击确定 */
+	$(".sure-btn").click(function() {
+		
+		top.CloseDialog("initiating-project");
+	});
+	    
+
+	</script>
+	
+	
+	
+</body>
+</html>

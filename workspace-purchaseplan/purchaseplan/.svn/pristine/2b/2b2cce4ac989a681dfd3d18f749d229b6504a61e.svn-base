@@ -1,0 +1,20 @@
+package com.youzhicai.purchaseplan.vo;
+
+import java.util.List;
+
+import com.youzhicai.purchaseplan.entity.PairModel;
+import com.youzhicai.purchaseplan.entity.PurchasePlanList;
+
+public class PurchasePlanListVO extends PurchasePlanList {
+
+    private List<PairModel> pairList;
+
+    public List<PairModel> getPairList() {
+        return pairList;
+    }
+
+    public void setPairList(List<PairModel> pairList) {
+        this.pairList = pairList;
+    }
+
+}

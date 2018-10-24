@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workingSetManager>
+<workingSet editPageId="org.eclipse.ui.resourceWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1539238941066_1" label="purchaseplan" name="purchaseplan">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/purchaseplan-business" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/purchaseplan-api" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/purchaseplan" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/purchaseplan-dependencies" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/purchaseplan-service" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/purchaseplan-web" type="4"/>
+</workingSet>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1539238865221_0" label="Window Working Set" name="Aggregate for window 1539238609802"/>
+</workingSetManager>

@@ -1,0 +1,258 @@
+package com.youzhicai.purchaseplan.web.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.youzhicai.purchaseplan.api.PurchaseInformationAPI;
+import com.youzhicai.purchaseplan.api.PurchasePlanListAPI;
+import com.youzhicai.purchaseplan.api.PurchaseRecipientAPI;
+import com.youzhicai.purchaseplan.dto.PurchaseInformationDTO;
+import com.youzhicai.purchaseplan.dto.PurchaseInformationPageDTO;
+import com.youzhicai.purchaseplan.dto.PurchasePlanListDTO;
+import com.youzhicai.purchaseplan.dto.PurchaseRecipientDTO;
+import com.youzhicai.purchaseplan.entity.PairModel;
+import com.youzhicai.purchaseplan.handler.Page;
+import com.youzhicai.purchaseplan.vo.PurchaseInformationVO;
+import com.youzhicai.purchaseplan.vo.PurchasePlanListVO;
+import com.youzhicai.purchaseplan.vo.PurchaseRecipientVO;
+import com.youzhicai.purchaseplan.web.common.PurchaseTypeEnum;
+import com.youzhicai.purchaseplan.web.common.PureProjectStatusEnum;
+import com.youzhicai.purchaseplan.web.domain.AuthInfo;
+import com.youzhicai.purchaseplan.web.entity.GoodsInpathModel;
+import com.youzhicai.purchaseplan.web.entity.GoodsOutModel;
+import com.youzhicai.purchaseplan.web.entity.GoodsTypeModel;
+import com.youzhicai.purchaseplan.web.service.FileAPI;
+import com.youzhicai.purchaseplan.web.service.MaterialstoreService;
+import com.youzhicai.purchaseplan.web.service.MemberAPI;
+import com.youzhicai.purchaseplan.web.util.ConfigUtil;
+import com.youzhicai.purchaseplan.web.util.IntegerUtil;
+import com.youzhicai.purchaseplan.web.util.StringUtil;
+
+/**
+ * 需求计划发起
+ * @ClassName:  PurchasePlanController
+ * @author: xia.nan
+ * @date:   2018年10月9日 下午4:22:36
+ *
+ *
+ */
+@Controller
+@RequestMapping("purchaseplan")
+public class PurchasePlanController {
+
+    @Autowired
+    private PurchaseInformationAPI purchaseInformationAPI;
+    @Autowired
+    private PurchasePlanListAPI planListAPI;
+    @Autowired
+    private MaterialstoreService materialstoreService;
+    @Autowired
+    private MemberAPI memberAPI;
+    @Autowired
+    private PurchaseRecipientAPI purchaseRecipientAPI;
+    @Autowired
+    private FileAPI fileAPI;
+
+    /**
+     * 需求计划发起主页面
+     * @Title: index
+     * @param: @param model
+     * @param: @return
+     * @return: String
+     * @throws
+     */
+    @RequestMapping("index")
+    public String index(HttpServletRequest request, Model model) {
+        AuthInfo auth = (AuthInfo) request.getSession().getAttribute(ConfigUtil.getValue("AuthInfo"));
+        String currentProjectURL = ConfigUtil.getValue("currentProjectURL");
+        model.addAttribute("currentProjectURL", currentProjectURL);
+        AuthInfo info = (AuthInfo) request.getSession().getAttribute(ConfigUtil.getValue("AuthInfo"));
+        PurchaseInformationPageDTO pageDTO = new PurchaseInformationPageDTO();
+        pageDTO.setRecipient_id(auth.getId());
+        Page<PurchaseInformationVO> page = purchaseInformationAPI.getPurchaseInformationByPage(pageDTO);
+        List<PairModel> statusEnumList = new ArrayList<PairModel>();
+        for (PurchaseInformationVO vo : page.getList()) {
+            for (PurchaseTypeEnum e : PurchaseTypeEnum.values()) {
+                if (IntegerUtil.IsIntegerEqualInt(vo.getPurchase_type(), e.getStatus())) {
+                    vo.setPurchase_type_value(e.getValue());
+                    break;
+                }
+            }
+
+            for (PureProjectStatusEnum en : PureProjectStatusEnum.values()) {
+                statusEnumList.add(new PairModel(en.getStatus() + "", en.getValue(), null));
+                if (IntegerUtil.IsIntegerEqualInt(vo.getNode_status(), en.getStatus())) {
+                    vo.setNode_status_value(en.getValue());
+                    break;
+                }
+            }
+        }
+        model.addAttribute("subsidiarieList", info.getSubsidiarieList());
+        model.addAttribute("purchaseInformationVO", page);
+        model.addAttribute("concentrated", PurchaseTypeEnum.CONCENTRATED);
+        model.addAttribute("customize", PurchaseTypeEnum.CUSTOMIZE);
+        model.addAttribute("statusEnumList", statusEnumList);
+        PurchaseRecipientDTO purchaseRecipientDTO = new PurchaseRecipientDTO();
+        purchaseRecipientDTO.setRecipient_status(0);
+        List<PurchaseRecipientVO> purchaseRecipientList = purchaseRecipientAPI.getPurchaseRecipientList(purchaseRecipientDTO);
+        PurchaseRecipientVO purchaseRecipientVO;
+        if (purchaseRecipientList.size() > 0) {
+            purchaseRecipientVO = purchaseRecipientList.get(0);
+        } else {
+            purchaseRecipientVO = new PurchaseRecipientVO();
+        }
+        model.addAttribute("purchaseRecipientVO", purchaseRecipientVO);
+
+        return "demandPlan/demandPlan";
+    }
+
+    /**
+     * 跳转新增采购需求页面
+     * @Title: add
+     * @param request
+     * @param model
+     * @return
+     * @return: String
+     */
+    @RequestMapping("demandplansheet")
+    public String getDemandPlanSheet(HttpServletRequest request, Model model, Integer purchasetype, Long informationid) {
+        AuthInfo auth = (AuthInfo) request.getSession().getAttribute(ConfigUtil.getValue("AuthInfo"));
+        model.addAttribute("purchasetype", purchasetype.intValue());
+        model.addAttribute("concentrated", PurchaseTypeEnum.CONCENTRATED);
+        model.addAttribute("customize", PurchaseTypeEnum.CUSTOMIZE);
+        PurchaseInformationDTO informationDTO = new PurchaseInformationDTO();
+        informationDTO.setId(informationid);
+        List<PurchaseInformationVO> purchaseInformationList = purchaseInformationAPI.getPurchaseInformationList(informationDTO);
+        PurchaseInformationVO vo = new PurchaseInformationVO();
+        if (purchaseInformationList.size() > 0) {
+            vo = purchaseInformationList.get(0);
+        }
+        model.addAttribute("purchaseinformationvo", vo);
+        PurchasePlanListDTO planDTO = new PurchasePlanListDTO();
+        planDTO.setInformation_id(vo.getId());
+        List<PurchasePlanListVO> purchasePlanList = planListAPI.getPurchasePlanList(planDTO);
+        String attachmentId = StringUtil.isNullOrEmpty(vo.getAttachment_id()) ? UUID.randomUUID().toString() : vo.getAttachment_id();
+        model.addAttribute("purchaseplanlist", purchasePlanList);
+        model.addAttribute("purchaseplanlistsize", purchasePlanList.size());
+        model.addAttribute("informationid", informationid);
+        model.addAttribute("attachmentId", attachmentId);
+        model.addAttribute("fileList", fileAPI.getFileList(attachmentId));
+        PurchaseRecipientDTO purchaseRecipientDTO = new PurchaseRecipientDTO();
+        purchaseRecipientDTO.setInformation_id(informationid);
+        purchaseRecipientDTO.setRecipient_status(0);
+        List<PurchaseRecipientVO> purchaseRecipientList = purchaseRecipientAPI.getPurchaseRecipientList(purchaseRecipientDTO);
+        if (purchaseRecipientList.size() > 0) {
+            model.addAttribute("purchaserecipient", purchaseRecipientList.get(0));
+        } else {
+            model.addAttribute("purchaserecipient", new PurchaseRecipientVO());
+        }
+
+        return "demandPlanSheet/demandPlanSheet";
+    }
+
+    @RequestMapping("addmaterial")
+    public String getaddMaterial(HttpServletRequest request, Model model, Integer purchasetype, Long informationid) {
+        AuthInfo auth = (AuthInfo) request.getSession().getAttribute(ConfigUtil.getValue("AuthInfo"));
+        model.addAttribute("purchasetype", purchasetype);
+        model.addAttribute("informationid", informationid);
+        GoodsOutModel<GoodsTypeModel> firstType = materialstoreService.getGoodsType(0, auth.getUser_ID());
+        model.addAttribute("firsttype", firstType);
+        GoodsInpathModel goodsInpathModel = new GoodsInpathModel();
+        goodsInpathModel.setCompanyId(auth.getUser_ID());
+        Page<PurchasePlanListVO> goodsList = materialstoreService.getPurchasePlanList(goodsInpathModel, informationid);
+        model.addAttribute("pagelistvo", goodsList);
+        model.addAttribute("pagelistsize", goodsList.getList().size());
+        String currentProjectURL = ConfigUtil.getValue("currentProjectURL");
+        model.addAttribute("currentProjectURL", currentProjectURL);
+        return "dialogContent/addMaterial";
+    }
+
+    @RequestMapping("getpagelistvotablesadd")
+    public String getPageListVOtablesAdd(HttpServletRequest request, Model model, String nameorcode, Integer firsttype, Integer secondtype,
+            Integer thirdtype, Long informationid) {
+        AuthInfo auth = (AuthInfo) request.getSession().getAttribute(ConfigUtil.getValue("AuthInfo"));
+        GoodsInpathModel goodsInpathModel = new GoodsInpathModel();
+        goodsInpathModel.setCompanyId(auth.getUser_ID());
+        goodsInpathModel.setNameOrCode(nameorcode);
+        goodsInpathModel.setFirstRankId(firsttype);
+        goodsInpathModel.setSecondRankId(secondtype);
+        goodsInpathModel.setThirdRankId(thirdtype);
+        Page<PurchasePlanListVO> goodsList = materialstoreService.getPurchasePlanList(goodsInpathModel, informationid);
+        model.addAttribute("pagelistvo", goodsList);
+        model.addAttribute("pagelistsize", goodsList.getList().size());
+        return "dialogContent/addMaterial::pageListVOtables";
+    }
+
+    @RequestMapping("demandplansheettable")
+    public String getDemandPlanSheetTable(HttpServletRequest request, Model model, Long informationid) {
+        PurchasePlanListDTO planDTO = new PurchasePlanListDTO();
+        planDTO.setInformation_id(informationid);
+        List<PurchasePlanListVO> purchasePlanList = planListAPI.getPurchasePlanList(planDTO);
+        model.addAttribute("purchaseplanlist", purchasePlanList);
+        model.addAttribute("purchaseplanlistsize", purchasePlanList.size());
+        return "demandPlanSheet/demandPlanSheet :: demandPlanSheetTable";
+    }
+
+    @RequestMapping("batchimportsheet")
+    public String getBatchImportSheet(HttpServletRequest request, Model model, Long informationid, Integer purchasetype) {
+        model.addAttribute("informationId", informationid);
+        model.addAttribute("purchaseType", purchasetype);
+        return "demandPlanSheet/batchImportSheet";
+    }
+
+    @RequestMapping("addmember")
+    public String getAddMember(HttpServletRequest request, Model model, Long informationid, Integer purchasetype) {
+        AuthInfo auth = (AuthInfo) request.getSession().getAttribute(ConfigUtil.getValue("AuthInfo"));
+        model.addAttribute("purchasetype", purchasetype);
+        model.addAttribute("informationid", informationid);
+        List<PurchaseRecipientVO> purchaserecipient = memberAPI.getPurchaseRecipientByMeber(33, informationid);
+        model.addAttribute("purchaserecipient", purchaserecipient);
+        model.addAttribute("purchaserecipientsize", purchaserecipient.size());
+        model.addAttribute("concentrated", PurchaseTypeEnum.CONCENTRATED);
+        model.addAttribute("customize", PurchaseTypeEnum.CUSTOMIZE);
+        PurchaseRecipientVO defaultContact = purchaseRecipientAPI.getDefaultContact(auth.getId());
+        if (defaultContact == null) {
+            defaultContact = new PurchaseRecipientVO();
+        }
+        model.addAttribute("defaultcontact", defaultContact);
+        return "dialogContent/addMember";
+    }
+
+    @RequestMapping("viewdemand")
+    public String viewDemand(HttpServletRequest request, Model model, Long informationid) {
+        model.addAttribute("concentrated", PurchaseTypeEnum.CONCENTRATED);
+        model.addAttribute("customize", PurchaseTypeEnum.CUSTOMIZE);
+        PurchaseInformationDTO informationDTO = new PurchaseInformationDTO();
+        informationDTO.setId(informationid);
+        List<PurchaseInformationVO> purchaseInformationList = purchaseInformationAPI.getPurchaseInformationList(informationDTO);
+        PurchaseInformationVO vo = new PurchaseInformationVO();
+        if (purchaseInformationList.size() > 0) {
+            vo = purchaseInformationList.get(0);
+        }
+        model.addAttribute("purchasetype", vo.getPurchase_type());
+        model.addAttribute("purchaseinformationvo", vo);
+        PurchasePlanListDTO planDTO = new PurchasePlanListDTO();
+        planDTO.setInformation_id(vo.getId());
+        List<PurchasePlanListVO> purchasePlanList = planListAPI.getPurchasePlanList(planDTO);
+        String attachmentId = StringUtil.isNullOrEmpty(vo.getAttachment_id()) ? UUID.randomUUID().toString() : vo.getAttachment_id();
+        model.addAttribute("purchaseplanlist", purchasePlanList);
+        model.addAttribute("purchaseplanlistsize", purchasePlanList.size());
+        model.addAttribute("informationid", informationid);
+        model.addAttribute("attachmentId", attachmentId);
+        model.addAttribute("fileList", fileAPI.getFileList(attachmentId));
+        PurchaseRecipientDTO purchaseRecipientDTO = new PurchaseRecipientDTO();
+        purchaseRecipientDTO.setInformation_id(informationid);
+        purchaseRecipientDTO.setRecipient_status(0);
+        List<PurchaseRecipientVO> purchaseRecipientList = purchaseRecipientAPI.getPurchaseRecipientList(purchaseRecipientDTO);
+        model.addAttribute("purchaserecipient", purchaseRecipientList.get(0));
+        return "demandPlanSheet/demandPlanSheetView";
+    }
+}

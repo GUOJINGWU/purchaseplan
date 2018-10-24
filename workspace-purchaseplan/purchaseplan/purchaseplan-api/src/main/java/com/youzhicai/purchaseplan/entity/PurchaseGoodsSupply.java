@@ -1,0 +1,55 @@
+package com.youzhicai.purchaseplan.entity;
+
+public class PurchaseGoodsSupply {
+    /** 主键ID **/
+    protected Long id;
+    /** 基本信息id **/
+    protected Long information_id;
+    /** 物资ID **/
+    protected Long goods_id;
+    /** 属性名id **/
+    protected String suppl_name;
+    /** 属性值 **/
+    protected String suppl_value;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getGoods_id() {
+        return goods_id;
+    }
+
+    public void setGoods_id(Long goods_id) {
+        this.goods_id = goods_id;
+    }
+
+    public String getSuppl_name() {
+        return suppl_name;
+    }
+
+    public void setSuppl_name(String suppl_name) {
+        this.suppl_name = suppl_name;
+    }
+
+    public String getSuppl_value() {
+        return suppl_value;
+    }
+
+    public void setSuppl_value(String suppl_value) {
+        this.suppl_value = suppl_value;
+    }
+
+    public Long getInformation_id() {
+        return information_id;
+    }
+
+    public void setInformation_id(Long information_id) {
+        this.information_id = information_id;
+    }
+
+}

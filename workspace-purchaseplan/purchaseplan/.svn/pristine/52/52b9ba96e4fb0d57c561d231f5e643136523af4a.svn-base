@@ -1,0 +1,16 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.youzhicai.purchaseplan</groupId>
+	<artifactId>purchaseplan</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>YouZhiCai Purchaseplan</name>
+	<description>YouZhiCai Purchaseplan</description>
+	<modules>
+		<module>purchaseplan-api</module>
+		<module>purchaseplan-dependencies</module>
+		<module>purchaseplan-service</module>
+		<module>purchaseplan-business</module>
+		<module>purchaseplan-web</module>
+	</modules>
+</project>

@@ -1,0 +1,501 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>demandPlan</title>
+    <link rel="stylesheet" href="../../res/css/global.css"></link>
+    <link rel="stylesheet" href="../../res/css/source.css"></link>
+    <link rel="stylesheet" href="../../res/css/plan.css"></link>
+    
+</head>
+<div th:include="default/yzcheader :: header"></div>
+<body class="yzc-skin-buyer">
+	<div class="yzc-frame-loading"></div>
+	<div class="yzc-frame-top"></div>
+	<div class="yzc-frame-center">
+		<div class="yzc-frame-right">
+			<div class="yzc-frame-body">
+				<div class="main-container">
+				
+				
+					<div class="main-con-form source">
+					
+						
+               			<div class="yui-title-c yui-clearfix">
+                        		<h4 class="yui-title-first yui-fl">需求计划</h4>
+                        		<a class="plan-blue-btn centralized-purchasing-btn" href="#">+新增集中采购需求</a>
+                        		<a class="plan-blue-btn self-purchase-btn" href="#">+新增自行采购需求</a>
+                    	</div>
+                    	
+                    	<form class="layui-form plan-form" action=""  style="padding-top: 20px">
+                       
+                        	<div class="layui-form-item plan-item" style="position:relative">
+
+
+                           		 <div class="layui-inline" style="width: 442px">
+                                	<label class="plan-label">需求编号：
+                               		 </label>
+
+                                		<div class="layui-input-block layui-input2"
+                                     style="display: inherit;margin-left: 0;position: relative;">
+                                    		<input lay-verify="title" autocomplete="off"
+                                           class="layui-input  input-clear"
+                                           placeholder="请输入要搜索编号"
+                                           type="text" style="width: 322px;display: inline-block;" />
+                                  
+                                		</div>
+                            	</div>
+
+                            
+		                            <div class="layui-inline" style="width: 470px">
+		                                <label class="plan-label">发起人：
+		                                </label>
+		
+		                                <div class="layui-input-block layui-input2"
+		                                     style="display: inherit;margin-left: 0;position: relative;">
+		                                    <input lay-verify="title" autocomplete="off"
+		                                           class="layui-input  input-clear"
+		                                           placeholder=""
+		                                           type="text" style="width: 240px;display: inline-block;" id="test1" />
+		                                           
+		                                        
+		                                  
+		                                </div>
+		                            </div>
+                            
+		                            <div class="layui-inline" style="width: 442px">
+		                                <label class="plan-label">发起时间：</label>
+		                                <div class="layui-input-block layui-input2"
+		                                     style="display: inherit;margin-left: 0;position: relative;">
+		                                    <input lay-verify="title" autocomplete="off"
+		                                           class="layui-input  input-clear"
+		                                           placeholder="请选择开始时间"
+		                                           type="text" style="width: 150px;display: inline-block;"  onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" />
+		                                           <span>至</span>	
+		                                           <input lay-verify="title" autocomplete="off"
+		                                           class="layui-input  input-clear"
+		                                           placeholder="请选择截止时间"
+		                                           type="text" style="width: 150px;display: inline-block;"  onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" />
+		                                  
+		                                </div>
+		                            </div>
+		                            
+		                            <div class="layui-inline" style="width: 470px">
+		                                <label class="plan-label">需求状态：</label>
+		                                <div class="layui-input-block  layui-input2 showform plan-input-block"
+		                                     style="margin-left: 0px !important;display: inline-block;width: 240px">
+		                                    <select name="" class="plan-type">
+		                                        <option value="全部">全部</option>
+		                                        <option value="采购公告">采购公告</option>
+		                                        <option value="资质审核">资质审核</option>
+		                           
+		                                        <option value="询价比价">询价比价</option>
+		                                        <option value="确定供应商">确定供应商</option>
+		                                        <option value="结果公示">结果公示</option>
+		
+		                                    </select>
+		
+		                                </div>
+		                            </div>
+                            
+		                             <div class="layui-inline" style="width: 442px">
+		                                <label class="plan-label">发起部门：</label>
+		                                <div class="layui-input-block  showform  my-limit"
+		                                     style="margin-left: 0px !important;display: inline-block;width: 318px">
+		                                    <select name="" class="plan-type">
+		                                        <option value="全部">全部</option>
+		                                        <option value="采购公告">采购公告</option>
+		                                        <option value="资质审核">资质审核</option>
+		                           
+		                                        <option value="询价比价">询价比价</option>
+		                                        <option value="确定供应商">确定供应商</option>
+		                                        <option value="结果公示">结果公示</option>
+		
+		                                    </select>
+		
+		                                </div>
+		                            </div>
+		                            
+		                            
+		                             
+		                            <div class="layui-inline" style="width: 470px">
+		                                <label class="plan-label">需求类型：</label>
+			                            <div class="layui-input-block" style="margin-left: 0px;display: inline-block;">
+			                                <input type="radio" name="1" value="集中采购" title="集中采购" />
+			                                <input type="radio" name="1" value="自行采购" title="自行采购" />
+			                            </div>
+		                            </div>
+		                            
+		                            
+		                            <a class="plan-radius-btn plan-search-btn">搜索</a>
+		                         	<a class="plan-radius-btn plan-clear-btn" onclick="onClear()">清除</a>
+		
+		                         
+		                       </div>
+		                        
+            
+                    </form>
+                    	
+               
+                </div>
+                
+                
+                    <div class="main-con-table source source-padding yzc-clearfix" >
+                   
+                    <div class="table-con">
+                        <table class="layui-table">
+                            <colgroup>
+                                <col width="4%" />
+                                <col width="20%" />
+                                <col width="10%" />                             
+                                <col width="9%" />
+                                <col width="8%" />
+                                <col width="9%" />
+                                <col width="10%" />
+                                <col width="15%" />
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th class="yzc-aCenter">序号</th>
+                                    <th class="yzc-aCenter">需求编号</th>
+                                    <th class="yzc-aCenter">发起人</th>                                    
+                                    <th class="yzc-aCenter">发起部门</th>
+                                    <th class="yzc-aCenter">发起时间</th>
+                                    <th class="yzc-aCenter">需求类型</th>
+                                    <th class="yzc-aCenter">需求状态</th>
+                                    <th class="yzc-aCenter">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="yzc-aCenter">1</td>
+                                    <td style="position:relative">
+                                        XQ123
+                                         <img alt="" src="../../res/images/urgent.png" class="plan-state-img"></img>
+                                    </td>
+                                    <td class="yzc-aCenter">
+                                    	张建
+                                    </td>
+                                    <td class="yzc-aCenter">
+                                    	办公室
+                                    </td>
+
+                                    <td class="yzc-aCenter">
+                                    2016-10-27 14：03：14
+                                    </td>
+                                    <td class="yzc-aCenter">集中采购</td>
+                                    <td class="yzc-aCenter">待确认</td>
+                                   
+                                    <td class="yzc-aCenter">
+                                        <a href="" class="plan-a">查看</a>&nbsp;&nbsp;
+                                        <a href="" class="plan-a">撤回</a>&nbsp;&nbsp;
+                                        <a href="" class="plan-a">查看</a>
+
+                                    </td>
+                                </tr>
+                                  <tr>
+                                    <td class="yzc-aCenter">1</td>
+                                    <td>
+                                        XQ123
+                                    </td>
+                                    <td class="yzc-aCenter">
+                                    	张建
+                                    </td>
+                                    <td class="yzc-aCenter">
+                                    	办公室
+                                    </td>
+
+                                    <td class="yzc-aCenter">
+                                    2016-10-27 14：03：14
+                                    </td>
+                                    <td class="yzc-aCenter">集中采购</td>
+                                    <td class="yzc-aCenter">待确认</td>
+                                   
+                                    <td class="yzc-aCenter">
+                                        <a href="" class="plan-a">查看</a>&nbsp;&nbsp;
+                                        <a href="" class="plan-a">撤回</a>&nbsp;&nbsp;
+                                        <a href="" class="plan-a">查看</a>
+
+                                    </td>
+                                </tr>
+                                  <tr>
+                                    <td class="yzc-aCenter">1</td>
+                                    <td>
+                                        XQ123
+                                    </td>
+                                    <td class="yzc-aCenter">
+                                    	张建
+                                    </td>
+                                    <td class="yzc-aCenter">
+                                    	办公室
+                                    </td>
+
+                                    <td class="yzc-aCenter">
+                                    2016-10-27 14：03：14
+                                    </td>
+                                    <td class="yzc-aCenter">集中采购</td>
+                                    <td class="yzc-aCenter">待确认</td>
+                                   
+                                    <td class="yzc-aCenter">
+                                        <a href="" class="plan-a">查看</a>&nbsp;&nbsp;
+                                        <a href="" class="plan-a">撤回</a>&nbsp;&nbsp;
+                                        <a href="" class="plan-a">查看</a>
+
+                                    </td>
+                                </tr>
+                                  <tr>
+                                    <td class="yzc-aCenter">1</td>
+                                    <td>
+                                        XQ123
+                                    </td>
+                                    <td class="yzc-aCenter">
+                                    	张建
+                                    </td>
+                                    <td class="yzc-aCenter">
+                                    	办公室
+                                    </td>
+
+                                    <td class="yzc-aCenter">
+                                    2016-10-27 14：03：14
+                                    </td>
+                                    <td class="yzc-aCenter">集中采购</td>
+                                    <td class="yzc-aCenter">待确认</td>
+                                   
+                                    <td class="yzc-aCenter">
+                                        <a href="" class="plan-a">查看</a>&nbsp;&nbsp;
+                                        <a href="" class="plan-a">撤回</a>&nbsp;&nbsp;
+                                        <a href="" class="plan-a">查看</a>
+
+                                    </td>
+                                </tr>
+                                  <tr>
+                                    <td class="yzc-aCenter">1</td>
+                                    <td>
+                                        XQ123
+                                    </td>
+                                    <td class="yzc-aCenter">
+                                    	张建
+                                    </td>
+                                    <td class="yzc-aCenter">
+                                    	办公室
+                                    </td>
+
+                                    <td class="yzc-aCenter">
+                                    2016-10-27 14：03：14
+                                    </td>
+                                    <td class="yzc-aCenter">集中采购</td>
+                                    <td class="yzc-aCenter">待确认</td>
+                                   
+                                    <td class="yzc-aCenter">
+                                        <a href="" class="plan-a">查看</a>&nbsp;&nbsp;
+                                        <a href="" class="plan-a">撤回</a>&nbsp;&nbsp;
+                                        <a href="" class="plan-a">查看</a>
+
+                                    </td>
+                                </tr>
+                                  <tr>
+                                    <td class="yzc-aCenter">1</td>
+                                    <td>
+                                        XQ123
+                                    </td>
+                                    <td class="yzc-aCenter">
+                                    	张建
+                                    </td>
+                                    <td class="yzc-aCenter">
+                                    	办公室
+                                    </td>
+
+                                    <td class="yzc-aCenter">
+                                    2016-10-27 14：03：14
+                                    </td>
+                                    <td class="yzc-aCenter">集中采购</td>
+                                    <td class="yzc-aCenter">待确认</td>
+                                   
+                                    <td class="yzc-aCenter">
+                                        <a href="" class="plan-a">查看</a>&nbsp;&nbsp;
+                                        <a href="" class="plan-a">撤回</a>&nbsp;&nbsp;
+                                        <a href="" class="plan-a">查看</a>
+
+                                    </td>
+                                </tr>
+                                  <tr>
+                                    <td class="yzc-aCenter">1</td>
+                                    <td>
+                                        XQ123
+                                    </td>
+                                    <td class="yzc-aCenter">
+                                    	张建
+                                    </td>
+                                    <td class="yzc-aCenter">
+                                    	办公室
+                                    </td>
+
+                                    <td class="yzc-aCenter">
+                                    2016-10-27 14：03：14
+                                    </td>
+                                    <td class="yzc-aCenter">集中采购</td>
+                                    <td class="yzc-aCenter">待确认</td>
+                                   
+                                    <td class="yzc-aCenter">
+                                        <a href="" class="plan-a">查看</a>&nbsp;&nbsp;
+                                        <a href="" class="plan-a">撤回</a>&nbsp;&nbsp;
+                                        <a href="" class="plan-a">查看</a>
+
+                                    </td>
+                                </tr>
+                                  <tr>
+                                    <td class="yzc-aCenter">1</td>
+                                    <td>
+                                        XQ123
+                                    </td>
+                                    <td class="yzc-aCenter">
+                                    	张建
+                                    </td>
+                                    <td class="yzc-aCenter">
+                                    	办公室
+                                    </td>
+
+                                    <td class="yzc-aCenter">
+                                    2016-10-27 14：03：14
+                                    </td>
+                                    <td class="yzc-aCenter">集中采购</td>
+                                    <td class="yzc-aCenter">待确认</td>
+                                   
+                                    <td class="yzc-aCenter">
+                                        <a href="" class="plan-a">查看</a>&nbsp;&nbsp;
+                                        <a href="" class="plan-a">撤回</a>&nbsp;&nbsp;
+                                        <a href="" class="plan-a">查看</a>
+
+                                    </td>
+                                </tr>
+                               
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="layui-box layui-laypage layui-laypage-default yzc-fr" id="">
+                        <span class="layui-laypage-curr">
+                            <em class="layui-laypage-em"></em>
+                            <em>1</em>
+                 	    </span>
+                        <a href="javascript:;" data-page="2">2</a>
+                        <a href="javascript:;" data-page="3">3</a>
+                        <a href="javascript:;" data-page="4">4</a>
+                        <a href="javascript:;" data-page="5">5</a>
+                        <span>…</span>
+                        <a href="javascript:;" class="layui-laypage-last" title="尾页" data-page="100">末页</a>
+
+
+                        <a href="javascript:;" class="layui-laypage-next" data-page="2">下一页</a>
+                        <span class="layui-laypage-total">到第
+                     	    <input min="1"  onkeyup="this.value=this.value.replace(/\D/, '');" value="1" class="layui-laypage-skip" type="number" /> 页
+                                                                       
+                            <button  type="button" class="layui-laypage-btn">确定</button>
+                        
+                        </span>
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                </div>
+     			
+                
+                
+                
+                
+
+            </div>
+            
+            
+            
+     			
+     			
+     			
+     			
+
+     			
+     			
+     			
+     			
+     			
+    		
+     			
+     			
+     			
+     			
+     			
+     			
+            
+            
+            
+            
+				</div>
+			</div>
+		</div>
+	
+	
+<div class="yzc-frame-bottom ">
+    <ul>
+        <li><a>网站首页</a></li>
+        <li><a>招标采购</a></li>
+        <li><a>企业采购</a></li>
+        <li><a>优采金融</a></li>
+        <li><a>帮助中心</a></li>
+        <li class="yzc-frame-nob"><a>意见反馈</a></li>
+    </ul>
+    <p>Copyright©2016 优质采（北京）科技发展有限公司 版权所有 皖ICP备05004986号</p>
+</div>
+	
+<script src="../../res/js/jquery.js" type="text/javascript"></script>
+<script src="../../res/js/placeholder.js" type="text/javascript"></script>
+<script>
+layui.use('laydate', function(){
+	  var laydate = layui.laydate;
+	  
+	  var start = {
+	    min: laydate.now()
+	    ,max: '2099-06-16 23:59:59'
+	    ,istoday: false
+	    ,choose: function(datas){
+	      end.min = datas; //开始日选好后，重置结束日的最小日期
+	      end.start = datas //将结束日的初始值设定为开始日
+	    }
+	  };
+	  
+	  var end = {
+	    min: laydate.now()
+	    ,max: '2099-06-16 23:59:59'
+	    ,istoday: false
+	    ,choose: function(datas){
+	      start.max = datas; //结束日选好后，重置开始日的最大日期
+	    }
+	  };
+	  
+	  document.getElementById('LAY_demorange_s').onclick = function(){
+	    start.elem = this;
+	    laydate(start);
+	  }
+	  document.getElementById('LAY_demorange_e').onclick = function(){
+	    end.elem = this
+	    laydate(end);
+	  }
+	  
+	});
+	  
+       
+        //点击清空
+        function onClear() {
+            $(".input-clear").val('');
+
+
+        }
+        
+        
+ 
+        
+</script>	
+</body>
+</html>

@@ -1,0 +1,51 @@
+package com.youzhicai.purchaseplan.business.impl;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.youzhicai.purchaseplan.api.PurchaseInformationAPI;
+import com.youzhicai.purchaseplan.common.constant.Params;
+import com.youzhicai.purchaseplan.dto.PurchaseInformationDTO;
+import com.youzhicai.purchaseplan.dto.PurchaseInformationPageDTO;
+import com.youzhicai.purchaseplan.handler.BusinessAPI;
+import com.youzhicai.purchaseplan.handler.Page;
+import com.youzhicai.purchaseplan.service.PurchaseInformationService;
+import com.youzhicai.purchaseplan.vo.PurchaseInformationVO;
+
+@RestController
+@RequestMapping(value = "purchaseInformation", method = { RequestMethod.GET, RequestMethod.POST })
+@BusinessAPI
+public class PurchaseInformationBusinessImpl implements PurchaseInformationAPI{
+
+    @Autowired
+    private HttpServletRequest request;
+
+    @Autowired
+    private PurchaseInformationService purchaseInformationService;
+    
+    @Override
+    public int savePurchaseInformation(PurchaseInformationDTO pDto) {
+        pDto = Params.toObj(request, pDto);
+        int rst = purchaseInformationService.savePurchaseInformation(pDto);
+        return rst;
+    }
+
+    @Override
+    public Page<PurchaseInformationVO> getPurchaseInformationByPage(PurchaseInformationPageDTO pageDTO) {
+        pageDTO = Params.toObj(request, pageDTO);
+        return purchaseInformationService.getPurchaseInformationByPage(pageDTO);
+    }
+
+    @Override
+    public List<PurchaseInformationVO> getPurchaseInformationList(PurchaseInformationDTO pDto) {
+        pDto = Params.toObj(request, pDto);
+        return purchaseInformationService.getPurchaseInformationList(pDto);
+    }
+    
+}

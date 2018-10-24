@@ -1,0 +1,48 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>退回</title>
+<link href="//cdn.ukzhicai.com/layui/css/layui.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" th:href="@{/res/css/dialog-content.css}" />
+
+</head>
+<body>
+	<div class="inner-content yzc-clearfix">
+		<div style="height:350px;overflow-y:auto;">
+		
+			
+			<form class="layui-form plan-form" action="" style="padding-top: 20px">
+				<div class="layui-form-item plan-item">
+				
+					<div class="layui-inline">
+						<label class="plan-label">需求编号： </label>
+						<span class="text-c">111</span>
+					</div>
+					<div class="layui-inline">
+						<label class="plan-label">需求类型： </label>
+						<span class="text-c">集中采购（月度计划）</span>
+					</div>
+					<div class="layui-inline">
+						<label class="plan-label">发起人： </label>
+						<span class="text-c">张建</span>
+					</div>
+					<div class="layui-inline">
+						<label class="plan-label">发起时间： </label>
+						<span class="text-c">2018-10-15 08:00:00</span>
+					</div>	
+					<div class="layui-inline">
+						<label class="plan-label">紧急原因： </label>
+						<span class="text-c">222222222222222</span>
+					</div>						
+				</div>							
+			</form>
+		
+		</div>
+		
+	</div>
+	<script src="https://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="../../res/js/Common.js"></script>
+	<script type="text/javascript" src="//cdn.ukzhicai.com/layui/layui.js"></script>
+	
+</body>
+</html>

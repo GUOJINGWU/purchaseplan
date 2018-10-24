@@ -1,0 +1,423 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>线下续单</title>
+
+
+<link rel="stylesheet" th:href="@{/res/css/global.css}" />
+<link rel="stylesheet" th:href="@{/res/css/source.css}" />
+<link rel="stylesheet" th:href="@{/res/css/ui-dialog.css}" />
+<link rel="stylesheet" th:href="@{/res/css/plan.css}" />
+
+</head>
+<div th:include="default/yzcheader :: header"></div>
+<body class="yzc-skin-buyer">
+	<div class="yzc-frame-loading"></div>
+	<div class="yzc-frame-top"></div>
+	<div class="yzc-frame-center">
+		<div class="yzc-frame-right">
+			<div class="yzc-frame-body">
+				<div class="main-container">
+					<div class="main-con-form source" style="padding-bottom: 0">
+						<div class="layui-tab layui-tab-card" lay-filter="supply" style="margin: 0px;">
+							<div class="main-content">
+								<h3 class="plan-need-list">线下续单</h3>
+								
+								<!--采购计划-->
+								<div class="need-plan">
+									<div class="yui-title-c yui-clearfix">
+										<h4 class="yui-title-first yui-fl">采购计划</h4>
+										
+									</div>
+									 <table class="layui-table">
+			                            <colgroup>
+			                                <col width="4%" />
+			                                <col width="10%" />
+			                                <col width="8%" />
+			                                <col width="8%" />
+			                                <col width="8%" />
+			                                <col width="8%" />                             
+			                                <col width="12%" />
+			                                <col width="8%" />
+			                                <col width="9%" />
+			                                <col width="9%" />
+			                                <col width="10%" />
+			                            </colgroup>
+			                            <thead>
+			                                <tr>
+			                                    <th class="yzc-aCenter">序号</th>
+			                                    <th class="yzc-aCenter">物资名称/编码</th>
+			                                    <th class="yzc-aCenter">需求数量</th>                                    
+			                                    <th class="yzc-aCenter">材质品牌</th>
+			                                    <th class="yzc-aCenter">规格型号</th>
+			                                    <th class="yzc-aCenter">其他属性</th>			                                    
+			                                    <th class="yzc-aCenter">备注</th>
+			                                    <th class="yzc-aCenter">发起单位</th>
+			                                    <th class="yzc-aCenter">发起人</th>
+			                                    <th class="yzc-aCenter">发起时间</th>
+			                                    <th class="yzc-aCenter">操作</th>
+			                                </tr>
+			                            </thead>
+			                            <tbody>
+			                                <tr>
+			                                    <td class="yzc-aCenter">1</td>
+			                                    <td style="position:relative">
+			                                        001
+			                                         <img alt="" src="../../res/images/urgent.png" class="plan-state-img"></img>
+			                                    </td>
+			                                    <td class="yzc-aCenter">
+			                                    	2
+			                                    </td>
+			                                    <td class="yzc-aCenter">
+			                                    	
+			                                    </td>
+			                                     <td class="yzc-aCenter">
+			                                    	
+			                                    </td>
+			
+			                                    <td class="yzc-aCenter">
+			                                   001
+			                                    </td>
+			                                    <td class="yzc-aCenter">紧急采购，加快速度</td>
+			                                    <td class="yzc-aCenter"></td>
+			                                  	<td class="yzc-aCenter">张建</td>
+			                                  	<td class="yzc-aCenter">2018-07-08 15：20：00</td>
+
+			                                    <td class="yzc-aCenter">
+			                                        <a  class="plan-a" href="javascript:watchDetail();">查看明细</a>
+			                                      
+			
+			                                    </td>
+			                                </tr>
+			                                  <tr>
+			                                    <td class="yzc-aCenter">1</td>
+			                                    <td style="position:relative">
+			                                        001
+			                                         <img alt="" src="../../res/images/urgent.png" class="plan-state-img"></img>
+			                                    </td>
+			                                    <td class="yzc-aCenter">
+			                                    	2
+			                                    </td>
+			                                    <td class="yzc-aCenter">
+			                                    	
+			                                    </td>
+			                                     <td class="yzc-aCenter">
+			                                    	
+			                                    </td>
+			
+			                                    <td class="yzc-aCenter">
+			                                   001
+			                                    </td>
+			                                    <td class="yzc-aCenter">紧急采购，加快速度</td>
+			                                    <td class="yzc-aCenter"></td>
+			                                  	<td class="yzc-aCenter">张建</td>
+			                                  	<td class="yzc-aCenter">2018-07-08 15：20：00</td>
+
+			                                    <td class="yzc-aCenter">
+			                                        <a  class="plan-a" href="javascript:watchDetail();">查看明细</a>
+			                                      
+			
+			                                    </td>
+			                                </tr>
+			                                 <tr>
+			                                    <td class="yzc-aCenter">1</td>
+			                                    <td style="position:relative">
+			                                        001
+			                                         <img alt="" src="../../res/images/urgent.png" class="plan-state-img"></img>
+			                                    </td>
+			                                    <td class="yzc-aCenter">
+			                                    	2
+			                                    </td>
+			                                    <td class="yzc-aCenter">
+			                                    	
+			                                    </td>
+			                                     <td class="yzc-aCenter">
+			                                    	
+			                                    </td>
+			
+			                                    <td class="yzc-aCenter">
+			                                   001
+			                                    </td>
+			                                    <td class="yzc-aCenter">紧急采购，加快速度</td>
+			                                    <td class="yzc-aCenter"></td>
+			                                  	<td class="yzc-aCenter">张建</td>
+			                                  	<td class="yzc-aCenter">2018-07-08 15：20：00</td>
+
+			                                    <td class="yzc-aCenter">
+			                                        <a  class="plan-a" href="javascript:watchDetail();">查看明细</a>
+			                                      
+			
+			                                    </td>
+			                                </tr>
+			                                 <tr>
+			                                    <td class="yzc-aCenter">1</td>
+			                                    <td style="position:relative">
+			                                        001
+			                                         <img alt="" src="../../res/images/urgent.png" class="plan-state-img"></img>
+			                                    </td>
+			                                    <td class="yzc-aCenter">
+			                                    	2
+			                                    </td>
+			                                    <td class="yzc-aCenter">
+			                                    	
+			                                    </td>
+			                                     <td class="yzc-aCenter">
+			                                    	
+			                                    </td>
+			
+			                                    <td class="yzc-aCenter">
+			                                   001
+			                                    </td>
+			                                    <td class="yzc-aCenter">紧急采购，加快速度</td>
+			                                    <td class="yzc-aCenter"></td>
+			                                  	<td class="yzc-aCenter">张建</td>
+			                                  	<td class="yzc-aCenter">2018-07-08 15：20：00</td>
+
+			                                    <td class="yzc-aCenter">
+			                                        <a  class="plan-a" href="javascript:watchDetail();">查看明细</a>
+			                                      
+			
+			                                    </td>
+			                                </tr>
+			                                 <tr>
+			                                    <td class="yzc-aCenter">1</td>
+			                                    <td style="position:relative">
+			                                        001
+			                                         <img alt="" src="../../res/images/urgent.png" class="plan-state-img"></img>
+			                                    </td>
+			                                    <td class="yzc-aCenter">
+			                                    	2
+			                                    </td>
+			                                    <td class="yzc-aCenter">
+			                                    	
+			                                    </td>
+			                                     <td class="yzc-aCenter">
+			                                    	
+			                                    </td>
+			
+			                                    <td class="yzc-aCenter">
+			                                   001
+			                                    </td>
+			                                    <td class="yzc-aCenter">紧急采购，加快速度</td>
+			                                    <td class="yzc-aCenter"></td>
+			                                  	<td class="yzc-aCenter">张建</td>
+			                                  	<td class="yzc-aCenter">2018-07-08 15：20：00</td>
+
+			                                    <td class="yzc-aCenter">
+			                                        <a  class="plan-a" href="javascript:watchDetail();">查看明细</a>
+			                                      
+			
+			                                    </td>
+			                                </tr>
+			                                 <tr>
+			                                    <td class="yzc-aCenter">1</td>
+			                                    <td style="position:relative">
+			                                        001
+			                                         <img alt="" src="../../res/images/urgent.png" class="plan-state-img"></img>
+			                                    </td>
+			                                    <td class="yzc-aCenter">
+			                                    	2
+			                                    </td>
+			                                    <td class="yzc-aCenter">
+			                                    	
+			                                    </td>
+			                                     <td class="yzc-aCenter">
+			                                    	
+			                                    </td>
+			
+			                                    <td class="yzc-aCenter">
+			                                   001
+			                                    </td>
+			                                    <td class="yzc-aCenter">紧急采购，加快速度</td>
+			                                    <td class="yzc-aCenter"></td>
+			                                  	<td class="yzc-aCenter">张建</td>
+			                                  	<td class="yzc-aCenter">2018-07-08 15：20：00</td>
+
+			                                    <td class="yzc-aCenter">
+			                                        <a class="plan-a" href="javascript:watchDetail();">查看明细</a>
+			                                      
+			
+			                                    </td>
+			                                </tr>
+			                                 <tr>
+			                                    <td class="yzc-aCenter">1</td>
+			                                    <td style="position:relative">
+			                                        001
+			                                         <img alt="" src="../../res/images/urgent.png" class="plan-state-img"></img>
+			                                    </td>
+			                                    <td class="yzc-aCenter">
+			                                    	2
+			                                    </td>
+			                                    <td class="yzc-aCenter">
+			                                    	
+			                                    </td>
+			                                     <td class="yzc-aCenter">
+			                                    	
+			                                    </td>
+			
+			                                    <td class="yzc-aCenter">
+			                                   001
+			                                    </td>
+			                                    <td class="yzc-aCenter">紧急采购，加快速度</td>
+			                                    <td class="yzc-aCenter"></td>
+			                                  	<td class="yzc-aCenter">张建</td>
+			                                  	<td class="yzc-aCenter">2018-07-08 15：20：00</td>
+
+			                                    <td class="yzc-aCenter">
+			                                        <a  class="plan-a" href="javascript:watchDetail();">查看明细</a>
+			                                      
+			
+			                                    </td>
+			                                </tr>
+			                                 <tr>
+			                                    <td class="yzc-aCenter">1</td>
+			                                    <td style="position:relative">
+			                                        001
+			                                         <img alt="" src="../../res/images/urgent.png" class="plan-state-img"></img>
+			                                    </td>
+			                                    <td class="yzc-aCenter">
+			                                    	2
+			                                    </td>
+			                                    <td class="yzc-aCenter">
+			                                    	
+			                                    </td>
+			                                     <td class="yzc-aCenter">
+			                                    	
+			                                    </td>
+			
+			                                    <td class="yzc-aCenter">
+			                                   001
+			                                    </td>
+			                                    <td class="yzc-aCenter">紧急采购，加快速度</td>
+			                                    <td class="yzc-aCenter"></td>
+			                                  	<td class="yzc-aCenter">张建</td>
+			                                  	<td class="yzc-aCenter">2018-07-08 15：20：00</td>
+
+			                                    <td class="yzc-aCenter"> 
+			                                        <a  class="plan-a" href="javascript:watchDetail();">查看明细</a>
+			                                      
+			
+			                                    </td>
+			                                </tr>
+			                               
+			                            </tbody>
+			                        </table>
+									<form class="layui-form plan-form" action="" style="padding-top: 20px">
+										<div class="layui-form-item layui-form-text">
+											<label class="plan-label" style="float: left">采购备注：</label>
+											<div class="yui-input-wrapper yui-fl form-block layui-input-block" style="margin-left: 0; display: inline-flex; width: 713px; position: relative;">
+												<textarea placeholder="请录入备注说明" class="textarea-control layui-textarea input-clear"></textarea>
+												<div class="textareaInputCounter yui-fcolor-9 remainder" style="position: absolute; right: 10px; bottom: 5px;">
+													<span class="remainder-number no-input-five">0</span>
+													/
+													<span class="maxNumber">250</span>
+												</div>
+											</div>
+										</div>
+										<div class="layui-form-item plan-item">
+											<label class="plan-label" style="float: left">需求附件： </label>
+											<div class="yui-input-wrapper yui-fl">
+												<button class="yui-btn yui-btn-inverse yui-skin-blue" id="js-load-diagram" title="上传附件" onclick="uploadFile.click()">
+													<i class="yui-icon icon-upload"></i>
+													上传附件
+													<input type="file" id="uploadFile" style="display: none" />
+												</button>
+												<ul class="detachmentList">
+													<li>
+														<span>招标公告和公示信息发布管理办法.pdf</span>
+														<a href="">
+															<img src="../../res/images/deleteIconBlue.png" alt=""></img>
+															<span>删除</span>
+														</a>
+														<a href="">
+															<img src="../../res/images/previewIconBlue.png" alt=""></img>
+															<span>预览</span>
+														</a>
+													</li>
+													<li>
+														<span>企业营业执照.jpg</span>
+														<a href="">
+															<img src="../../res/images/deleteIconBlue.png" alt=""></img>
+															<span>删除</span>
+														</a>
+														<a href="">
+															<img src="../../res/images/previewIconBlue.png" alt=""></img>
+															<span>预览</span>
+														</a>
+													</li>
+													<li>
+														<span>组织机构代码证.jpg</span>
+														<a href="">
+															<img src="../../res/images/deleteIconBlue.png" alt=""></img>
+															<span>删除</span>
+														</a>
+														<a href="">
+															<img src="../../res/images/previewIconBlue.png" alt=""></img>
+															<span>预览</span>
+														</a>
+													</li>
+												</ul>
+											</div>
+										</div>
+										
+										
+										<div class="layui-form-item plan-item">
+											<div class="layui-inline" style="width: 860px">
+												<label class="plan-label">
+													供货商：
+												</label>
+												<div class="layui-input-block layui-input2" style="display: inherit; margin-left: 0; position: relative;">
+													<input lay-verify="title" autocomplete="off" class="layui-input " placeholder="" type="text" style="width: 300px; display: inline-block;" />
+													<a href="javascript:supplierSelection();" class="plan-radius-btn supplier-selection">选择供货商</a>
+												</div>
+											</div>
+										</div>
+										
+									</form>
+								</div>
+								<p class="button-group">
+									
+									<a class="plan-sure-btn">确定发送</a>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="yzc-frame-bottom ">
+		<ul>
+			<li>
+				<a>网站首页</a>
+			</li>
+			<li>
+				<a>招标采购</a>
+			</li>
+			<li>
+				<a>企业采购</a>
+			</li>
+			<li>
+				<a>优采金融</a>
+			</li>
+			<li>
+				<a>帮助中心</a>
+			</li>
+			<li class="yzc-frame-nob">
+				<a>意见反馈</a>
+			</li>
+		</ul>
+		<p>Copyright©2016 优质采（北京）科技发展有限公司 版权所有 皖ICP备05004986号</p>
+	</div>
+	<input type="hidden" id="currentProjectURL" th:value="${currentProjectURL}" />
+	<input type="hidden" id="informationId" th:value="${purchaseinformationvo.id}"/>
+	<input type="hidden" id="purchaseType" name="purchaseType" th:value="${purchasetype}"/>
+	<script th:src="@{/res/js/jquery.js}" type="text/javascript"></script>
+	<script th:src="@{/res/js/Common.js}" type="text/javascript"></script>
+	<script th:src="@{/res/js/placeholder.js}" type="text/javascript"></script>
+	<script th:src="@{/res/util/dialog-plus-min.js}" type="text/javascript"></script>
+	<script th:src="@{/res/util/purchaseplanCommon.js}" type="text/javascript"></script>
+	<script th:src="@{/res/javascript/demandPlanSheetJS.js}" type="text/javascript"></script>
+	<script th:src="@{/res/js/plan.js}" type="text/javascript"></script>
+</body>
+</html>

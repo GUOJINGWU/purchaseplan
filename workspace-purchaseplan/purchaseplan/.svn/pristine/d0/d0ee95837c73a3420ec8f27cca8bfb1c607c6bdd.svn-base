@@ -1,0 +1,20 @@
+package com.youzhicai.purchaseplan.enums;
+
+public enum BasicEnums {
+    DEFAULT(0, "失败"), SUCCESS(1, "成功"), FAILURE(2, "失败");
+    private int status;
+    private String value;
+
+    private BasicEnums(int status, String value) {
+        this.status = status;
+        this.value = value;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public String getValue() {
+        return value;
+    }
+}

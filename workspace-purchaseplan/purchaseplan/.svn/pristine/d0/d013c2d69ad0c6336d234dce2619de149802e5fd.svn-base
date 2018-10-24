@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace的值就是dao接口的完整路径 -->
+<mapper namespace="com.youzhicai.purchaseplan.dao.PurchaseRecipientDAO">
+	<sql id="recipient_columns_withoutID">
+		information_id,recipient_id,recipient_name,company_id,company_name,recipient_status
+	</sql>
+
+	<sql id="recipient_columns">
+		id,
+		<include refid="recipient_columns_withoutID" />
+	</sql>
+
+	<insert id="savePurchaseRecipientList" parameterType="java.util.List">
+		INSERT INTO t_sppurchase_recipient(information_id, recipient_id,
+		recipient_name, company_id, company_name)
+		VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.information_id},#{item.recipient_id},#{item.recipient_name},#{item.company_id},#{item.company_name})
+		</foreach>
+	</insert>
+
+	<select id="getPurchaseRecipientList" resultType="com.youzhicai.purchaseplan.vo.PurchaseRecipientVO">
+		SELECT
+		<include refid="recipient_columns"></include>
+		FROM t_sppurchase_recipient
+		WHERE recipient_status != -2
+		<if test="id != null and id != '' ">
+			AND id = #{id}
+		</if>
+		<if test="informationId != null and informationId != '' ">
+			AND information_id = #{informationId}
+		</if>
+		ORDER BY id DESC;
+	</select>
+
+	<update id="removePurchaseRecipientById" parameterType="Long">
+		UPDATE t_sppurchase_recipient SET recipient_status = -2 WHERE id = #{id};
+	</update>
+
+	<update id="removePurchaseRecipientByInformationId"
+		parameterType="Long">
+		UPDATE t_sppurchase_recipient SET recipient_status = -2 WHERE information_id =
+		#{informationId};
+	</update>
+</mapper>

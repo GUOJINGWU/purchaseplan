@@ -1,0 +1,80 @@
+package com.youzhicai.purchaseplan.web.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.youzhicai.purchaseplan.api.MaterialstoreGoodsAPI;
+import com.youzhicai.purchaseplan.api.PurchasePlanListAPI;
+import com.youzhicai.purchaseplan.common.constant.TypeTokens;
+import com.youzhicai.purchaseplan.common.util.POUtil;
+import com.youzhicai.purchaseplan.dto.PurchaseGoodsSupplyDTO;
+import com.youzhicai.purchaseplan.dto.PurchasePlanListDTO;
+import com.youzhicai.purchaseplan.vo.MaterialstoreGoodsVO;
+import com.youzhicai.purchaseplan.web.common.PureProjectStatusEnum;
+import com.youzhicai.purchaseplan.web.domain.AuthInfo;
+import com.youzhicai.purchaseplan.web.entity.ReturnInfo;
+import com.youzhicai.purchaseplan.web.util.ConfigUtil;
+
+/**
+ * 
+ * @ClassName: PurchasePlanRest
+ * @author: xia.nan
+ * @date: 2018年10月16日 下午5:07:58
+ */
+@RestController
+@RequestMapping(value = "purchaseplanrest")
+public class PurchasePlanRestController {
+
+    @Autowired
+    private MaterialstoreGoodsAPI materialstoreGoodsAPI;
+
+    @Autowired
+    private PurchasePlanListAPI planListAPI;
+
+    @SuppressWarnings("rawtypes")
+    @RequestMapping(value = "savepurchaseplanlist")
+    public ReturnInfo savePurchasePlanList(HttpServletRequest request, @RequestBody PurchasePlanListDTO planListDTO) {
+        ReturnInfo info = new ReturnInfo();
+        AuthInfo auth = (AuthInfo) request.getSession().getAttribute(ConfigUtil.getValue("AuthInfo"));
+        List<MaterialstoreGoodsVO> materialstoreGoods = materialstoreGoodsAPI.getMaterialstoreGoodsById(planListDTO.getGoods_id());
+        List<PurchasePlanListDTO> saveList = MaterialstoreGoodsToPurchasePlanListDTO(materialstoreGoods, auth, planListDTO);
+        int savePurchasePlanList = planListAPI.savePurchasePlanList(saveList);
+        if (savePurchasePlanList > 0) {
+            List<PurchaseGoodsSupplyDTO> saveGoodsList = POUtil.convert(materialstoreGoodsAPI.getPurchaseGoodsSupply(planListDTO.getGoods_id()), PurchaseGoodsSupplyDTO.class,
+                    TypeTokens.PurchaseGoodsSupplyTypeDTO);
+            for (PurchaseGoodsSupplyDTO goods : saveGoodsList) {
+                goods.setInformation_id(planListDTO.getInformation_id());
+            }
+            planListAPI.saveGoodsSupply(saveGoodsList);
+        }
+        info.setStatus(PureProjectStatusEnum.COMPLETED.getStatus());
+        info.setDesc("保存成功！！");
+        return info;
+    }
+
+    private List<PurchasePlanListDTO> MaterialstoreGoodsToPurchasePlanListDTO(List<MaterialstoreGoodsVO> materialstoreGoods, AuthInfo auth, PurchasePlanListDTO planListDTO) {
+        List<PurchasePlanListDTO> list = new ArrayList<PurchasePlanListDTO>(materialstoreGoods.size());
+
+        for (MaterialstoreGoodsVO mVo : materialstoreGoods) {
+            PurchasePlanListDTO purchasePlanListDTO = new PurchasePlanListDTO();
+            purchasePlanListDTO.setInformation_id(planListDTO.getInformation_id());
+            purchasePlanListDTO.setGoods_id(mVo.getId());
+            purchasePlanListDTO.setPlan_coding(mVo.getCode());
+            purchasePlanListDTO.setPlan_name(mVo.getName());
+            purchasePlanListDTO.setPlan_brand(mVo.getBrand());
+            purchasePlanListDTO.setPlan_specifications(mVo.getSpecifications());
+            purchasePlanListDTO.setPlan_unit(mVo.getUnit());
+            purchasePlanListDTO.setPlan_manual(mVo.getRemarks());
+            purchasePlanListDTO.setPlan_quantity(planListDTO.getPlan_quantity());
+            list.add(purchasePlanListDTO);
+        }
+        return list;
+    }
+}

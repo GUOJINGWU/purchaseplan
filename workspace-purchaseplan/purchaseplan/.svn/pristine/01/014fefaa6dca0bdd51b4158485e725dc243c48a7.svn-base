@@ -1,0 +1,67 @@
+package com.youzhicai.purchaseplan.web.util;
+
+import org.apache.commons.lang.StringUtils;
+
+/**
+ * 字符串扩展工具类
+ * 
+ * @author douqr 2017-12-29
+ * 
+ */
+public class StringUtil {
+
+    /**
+     * 判断字符串是否为空
+     * 
+     * @param str
+     * @return 判断结果
+     * @author douqr 2017-12-29
+     */
+    public static Boolean isNullOrEmpty(String str) {
+        if (str == null || str.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 判断字符串是否完全一致
+     * 
+     * @author xia.nan
+     * @param str1
+     * @param str2
+     * @return
+     * @date 2018-08-13
+     */
+    public static Boolean isStrIdentical(String str1, String str2) {
+        if (StringUtils.isBlank(str1) && StringUtils.isBlank(str2)) {
+            return Boolean.TRUE;
+        }
+        if (StringUtils.isBlank(str1) || StringUtils.isBlank(str2)) {
+            return Boolean.FALSE;
+        } else if (!str1.equals(str2)) {
+            return Boolean.FALSE;
+        }
+        return Boolean.TRUE;
+    }
+
+    /**
+     * 
+     * @Title: isNumbers
+     * @param str
+     * @return
+     * @return: Boolean
+     */
+    public static Boolean isNumbers(String str) {
+        try {
+            if (StringUtils.isBlank(str)) {
+                return Boolean.FALSE;
+            }
+            Double.parseDouble(str);
+            return Boolean.TRUE;
+        } catch (Exception e) {
+            return Boolean.FALSE;
+        }
+    }
+
+}

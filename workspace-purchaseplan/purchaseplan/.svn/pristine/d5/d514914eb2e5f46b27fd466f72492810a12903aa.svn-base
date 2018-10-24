@@ -1,0 +1,98 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>addMember</title>
+<link href="//cdn.ukzhicai.com/layui/css/layui.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" th:href="@{/res/css/dialog-content.css}" />
+<script src="https://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="//cdn.youzhicai.com/layui/layui.js"></script>
+
+
+</head>
+<body>
+	<div class="inner-content">
+	
+      
+        <span class="label-left">常用人员：</span><span>暂无</span>
+        <br></br>
+        <span class="label-left">需求类型：</span><span>集中采购</span>
+        <br></br>
+        <span class="label-left">已选人员：</span><span>张建</span>
+       	<div style="height:222px;overflow:auto">
+	         <table class="layui-table">
+	                            <colgroup>
+	                                <col width="10%" />
+	                                <col width="20%" />
+	                                <col width="20%" />                             
+	                                <col width="10%" />
+	                               
+	                            </colgroup>
+	                            <thead>
+	                                <tr>
+	                                    <th class="yzc-aCenter">序号</th>
+	                                    <th class="yzc-aCenter">可选人员</th>
+	                            
+	                                    <th class="yzc-aCenter">公司名称</th>
+	                                    <th class="yzc-aCenter">操作</th>
+	                                </tr>
+	                            </thead>
+	                            <tbody>
+	                                <tr>
+	                                    <td class="yzc-aCenter">1</td>
+	                                    <td style="position:relative">
+	                                      	张建
+	                                    </td>
+	                                    <td class="yzc-aCenter">
+	                                    	总公司
+	                                    </td>
+	                                    <td class="yzc-aCenter">
+	                                    <a href="" class="plan-a">取消 </a>
+	                                    	 
+	                                    </td>
+	                                </tr>
+	                                <tr>
+	                                    <td class="yzc-aCenter">2</td>
+	                                    <td style="position:relative">
+	                                      	张建
+	                                    </td>
+	                                    <td class="yzc-aCenter">
+	                                    	总公司
+	                                    </td>
+	                                    <td class="yzc-aCenter">
+	                                    <a href="">选择 </a>
+	                                    	 
+	                                    </td>
+	                                </tr>
+	                                <tr>
+	                                    <td class="yzc-aCenter">3</td>
+	                                    <td style="position:relative">
+	                                      	张建
+	                                    </td>
+	                                    <td class="yzc-aCenter">
+	                                    	总公司
+	                                    </td>
+	                                    <td class="yzc-aCenter">
+	                                    <a href="">选择 </a>
+	                                    	 
+	                                    </td>
+	                                </tr>
+	                                  
+	                               
+	                            </tbody>
+	                        </table>
+	                    </div>   
+                        <p class="button-group">
+							<a class="plan-white-btn plan-margin-btn back-btn">返回</a>
+							<a class="plan-blue-btn sure-btn">确定</a>		
+						</p>
+                    </div>
+                    
+  
+                    
+     <script type="text/javascript">
+        $(".sure-btn , .back-btn").click(function(){
+        	top.CloseDialog("add-people");
+        })
+    </script>
+</body>
+</html>

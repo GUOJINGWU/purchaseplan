@@ -1,0 +1,83 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>退回</title>
+<link href="//cdn.ukzhicai.com/layui/css/layui.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" th:href="@{/res/css/dialog-content.css}" />
+
+</head>
+<body>
+	<div class="inner-content yzc-clearfix">
+	
+			
+			<form class="layui-form plan-form" action="" style="padding-top: 20px">
+				<div class="layui-form-item plan-item">
+				
+					<div class="layui-inline" style="float:left">
+						<label class="plan-label">需求编码： </label>
+						<span class="text-c">111</span>
+					</div>
+					<div class="layui-inline" style="float:left">
+						<label class="plan-label">物资编码： </label>
+						<span class="text-c">222</span>
+					</div>
+					<div class="layui-inline" style="float:left">
+						<label class="plan-label">物资名称： </label>
+						<span class="text-c">333</span>
+					</div>
+					<div class="layui-inline" style="float:left">
+						<label class="plan-label">操作人： </label>
+						<span class="text-c">张建</span>
+					</div>	
+											
+				</div>	
+				
+				<div class="layui-form-item" style="position:relative">
+
+
+	   		 			<div class="layui-inline" style="width: 464px">
+		        			<label class="plan-label" style="width: 110px !important;">退回内容：
+		       		 		</label>
+		        			<div class="layui-input-block" style="margin-left: 0px; display: inline-block;">
+								<input type="radio" name="22" value="1" title="当前物资"  lay-filter="plan-type" />
+								<input type="radio" name="22" value="2" title="当前需求单所有物资"  lay-filter="plan-type" />
+								
+								
+							</div>
+						</div>
+					
+					</div>
+				
+				<div class="layui-form-item layui-form-text">
+						<label class="plan-label" style="float:left">*退回原因：</label>
+						<div class="yui-input-wrapper yui-fl form-block layui-input-block" style="margin-left: 0; display: inline-flex; width: 413px; position: relative;">
+											<textarea name="remarks" placeholder="请输入内容" class="textarea-control layui-textarea"></textarea>
+											<div class="textareaInputCounter yui-fcolor-9 remainder" style="position: absolute; right: 5px; bottom: 5px;">
+												<span class="remainder-number no-input-five">0</span>
+												/
+												<span class="maxNumber">250</span>
+											</div>
+						</div>											
+				</div>						
+			</form>
+		
+		
+		
+	</div>
+	<script src="https://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="../../res/js/Common.js"></script>
+	<script type="text/javascript" src="//cdn.ukzhicai.com/layui/layui.js"></script>
+	
+	
+	
+	<script>
+	
+	layui.use([ 'form' ], function() {
+		var form = layui.form();
+		form.on('radio(plan-type)', function(data) {
+			
+		});
+	});
+	</script>
+</body>
+</html>

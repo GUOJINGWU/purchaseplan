@@ -1,0 +1,225 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>合并计划</title>
+<link href="//cdn.ukzhicai.com/layui/css/layui.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" th:href="@{/res/css/dialog-content.css}" />
+<link rel="stylesheet" th:href="@{/res/css/global.css}" />
+<link rel="stylesheet" th:href="@{/res/css/ui-dialog.css}" />
+
+</head>
+<body>
+	<div class="inner-content">
+		
+		<div>
+			<form class="layui-form plan-form limit-form" action=""  style="padding-top: 20px">
+    
+					<div class="layui-form-item">
+							<div class="layui-inline" style="width: 620px">
+											<label class="plan-label">
+												
+												采购计划编码：
+											</label>
+											<div class="layui-input-block layui-input2" style="display: inherit; margin-left: 0; position: relative;">
+												<input name="name" lay-verify="title" autocomplete="off" class="layui-input insideInputWrapper-input input-clear" placeholder="请输入采购计划编码" type="text" style="width: 480px; display: inline-block;" />
+												<div class="inputCounter yui-fcolor-9" style="position: absolute; left: 492px; top: 6px;">
+													(<span class="remainder-number no-input-one">0</span>/<span class="maxNumber">50</span>)
+												</div>
+											</div>
+							</div>	
+							<div class="layui-inline" style="width: 620px">
+											<label class="plan-label">
+												
+												采购计划名称：
+											</label>
+											<div class="layui-input-block layui-input2" style="display: inherit; margin-left: 0; position: relative;">
+												<input name="name" lay-verify="title" autocomplete="off" class="layui-input insideInputWrapper-input input-clear" placeholder="请输入采购计划名称" type="text" style="width: 480px; display: inline-block;" />
+												<div class="inputCounter yui-fcolor-9" style="position: absolute; left: 492px; top: 6px;">
+													(<span class="remainder-number no-input-one">0</span>/<span class="maxNumber">50</span>)
+												</div>
+											</div>
+							</div>				
+					
+					</div>
+		</form>
+		<div style="height:300px;overflow:auto;">
+		
+		<table class="layui-table">
+								<colgroup>
+									<col width="2%" />
+									<col width="20%" />
+									<col width="12%" />
+									<col width="18%" />
+									<col width="11%" />
+									<col width="9%" />
+									<col width="10%" />
+									
+									
+								</colgroup>
+								<thead>
+									<tr>
+										
+										<th class="yzc-aCenter">序号</th>
+										<th class="yzc-aCenter">物资名称/编码</th>
+										<th class="yzc-aCenter">需求数量</th>
+										<th class="yzc-aCenter">其他属性</th>
+										<th class="yzc-aCenter">备注</th>
+										<th class="yzc-aCenter">需求编号</th>
+										<th class="yzc-aCenter">发起人</th>
+										<th class="yzc-aCenter">发起时间</th>
+										
+									</tr>
+								</thead>
+								<tbody>
+									<tr >
+										<td class="yzc-aCenter">
+											1
+										</td>
+										
+										<td style="position: relative">
+											222101331
+											减速器
+											<img alt="" src="../../res/images/urgent.png" class="plan-state-img"></img>
+										</td>
+										<td class="yzc-aCenter">2</td>
+										<td class="yzc-aCenter">002</td>
+										<td class="yzc-aCenter"></td>
+										<td class="yzc-aCenter"></td>
+										<td class="yzc-aCenter">张建</td>
+										<td class="yzc-aCenter">
+										
+
+											2018-07-08
+											
+											15：20：00
+										
+										</td>
+										
+									</tr>
+									<tr >
+										<td class="yzc-aCenter">
+											1
+										</td>
+										
+										<td style="position: relative">
+											222101331
+											减速器
+											<img alt="" src="../../res/images/urgent.png" class="plan-state-img"></img>
+										</td>
+										<td class="yzc-aCenter">2</td>
+										<td class="yzc-aCenter">002</td>
+										<td class="yzc-aCenter"></td>
+										<td class="yzc-aCenter"></td>
+										<td class="yzc-aCenter">张建</td>
+										<td class="yzc-aCenter">
+										
+
+											2018-07-08
+											
+											15：20：00
+										
+										</td>
+										
+									</tr>
+									<tr >
+										<td class="yzc-aCenter">
+											1
+										</td>
+										
+										<td style="position: relative">
+											222101331
+											减速器
+											<img alt="" src="../../res/images/urgent.png" class="plan-state-img"></img>
+										</td>
+										<td class="yzc-aCenter">2</td>
+										<td class="yzc-aCenter">002</td>
+										<td class="yzc-aCenter"></td>
+										<td class="yzc-aCenter"></td>
+										<td class="yzc-aCenter">张建</td>
+										<td class="yzc-aCenter">
+										
+
+											2018-07-08
+											
+											15：20：00
+										
+										</td>
+										
+									</tr>
+									<tr >
+										<td class="yzc-aCenter">
+											1
+										</td>
+										
+										<td style="position: relative">
+											222101331
+											减速器
+											<img alt="" src="../../res/images/urgent.png" class="plan-state-img"></img>
+										</td>
+										<td class="yzc-aCenter">2</td>
+										<td class="yzc-aCenter">002</td>
+										<td class="yzc-aCenter"></td>
+										<td class="yzc-aCenter"></td>
+										<td class="yzc-aCenter">张建</td>
+										<td class="yzc-aCenter">
+										
+
+											2018-07-08
+											
+											15：20：00
+										
+										</td>
+										
+									</tr>
+								</tbody>
+					</table>			
+		</div>
+		
+									
+		
+		
+		
+		
+		
+		
+		
+		
+		</div>
+		<p class="button-group">
+			<a class="plan-white-btn plan-margin-btn cancel-btn">取消</a>
+			<a class="plan-blue-btn sure-btn">确定</a>
+		</p>
+	</div>
+	<script src="https://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="../../res/js/Common.js"></script>
+	<script type="text/javascript" src="//cdn.ukzhicai.com/layui/layui.js"></script>
+	<script>
+	
+	layui.use([ 'form' ], function() {
+		var form = layui.form();
+		form.on('radio(plan-type)', function(data) {
+			
+		});
+	});
+	
+	
+	/* 点击取消 */
+	$(".cancel-btn").click(function() {
+		
+		top.CloseDialog("plan-confirm");
+	});
+	    
+
+	/* 点击确定 */
+	$(".sure-btn").click(function() {
+		
+		top.CloseDialog("plan-confirm");
+	});
+	    
+
+	</script>
+	
+	
+	
+</body>
+</html>

@@ -1,0 +1,30 @@
+package com.youzhicai.purchaseplan.web.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.youzhicai.purchaseplan.web.util.ConfigUtil;
+
+/**
+ * 线下续单
+ * @ClassName:  SingleOfflineController
+ * @author: xia.nan
+ * @date:   2018年10月9日 下午4:29:13
+ *
+ *
+ */
+@Controller
+@RequestMapping("singleoffline")
+public class SingleOfflineController {
+    /**
+     * 
+     * @param model
+     * @return
+     */
+    @RequestMapping("index")
+    public String index(Model model) {
+        String currentProjectURL = ConfigUtil.getValue("currentProjectURL");
+        return "default/demo";
+    }
+}

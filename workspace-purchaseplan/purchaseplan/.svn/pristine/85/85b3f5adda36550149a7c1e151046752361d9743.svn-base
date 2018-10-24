@@ -1,0 +1,45 @@
+$(function() {
+	layui.use([ 'form' ], function() {
+		var form = layui.form();
+		form.on('radio(plan-type)', function(data) {
+			if(data.value == 2){
+				console.log(data.value);
+				$('.emergency-item').show();
+				form.render();
+			}else if(data.value == 1){
+				console.log(data.value);
+				$('.emergency-item').hide();
+				form.render();
+			}
+		});
+	});
+});
+
+// 添加人员弹窗
+function addMember() {
+	var currentProjectURL = $("#currentProjectURL").val();
+	OpenSimpleUrl("add-people", "", currentProjectURL + "/pageJump", '640px', '416px');
+}
+
+// 添加物资弹窗
+function addMaterial() {
+	var currentProjectURL = $("#currentProjectURL").val();
+	var informationId = $("#informationId").val();
+	var purchasetype = 
+	OpenSimpleUrl("add-material", "", currentProjectURL + "/addmaterial?informationId="+informationId+"&purchasetype="+purchasetype, '940px', '600px');
+}
+//批量导入弹窗
+function batchImport(){
+	var txt = '<div>'+
+					'<p style="text-align:center;padding:30px 0 50px 0;font-size: 18px;">批量导入物资</p>'+
+					'<div style="width:338px;height:32px;margin:0 auto">'+
+					'<input type="text" style="width:270px;height:32px;margin:0 auto;vertical-align: top;" />'+
+					'<button style="height:32px;border:none;background:#2d8ff7;color:#fff;width: 68px;border-radius: 2px;" onclick="upload.click()">附件<input type="file" id="upload" style="display: none" /></button>'+
+					'<p style="text-align:center;padding:10px 0 0 0;font-size: 14px;color:#9A9CA0">建议下载<a class="plan-a" style="display:inline-block;margin:0 5px">物资模板</a>按招平台格式上传物资</p>'+
+					'</div>'+
+					
+				'</div>';
+	confirmDialog("批量导入信息", txt, function() {
+		
+	});
+}

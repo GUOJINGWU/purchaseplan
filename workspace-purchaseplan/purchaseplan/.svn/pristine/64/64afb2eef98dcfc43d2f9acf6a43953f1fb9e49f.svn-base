@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"    
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace的值就是dao接口的完整路径 -->
+<mapper namespace="com.youzhicai.purchaseplan.dao.PurchaseGoodsSupplyDAO">
+	<sql id="goods_columns_withoutID">
+		information_id,goods_id,suppl_name,suppl_value
+	</sql>
+
+	<sql id="goods_columns">
+		id,
+		<include refid="goods_columns_withoutID" />
+	</sql>
+
+	<insert id="savePurchaseGoodsSupply" parameterType="com.youzhicai.purchaseplan.po.PurchaseGoodsSupplyPO">
+		INSERT INTO t_sppurchase_goodssupply(
+		<include refid="goods_columns_withoutID" />
+		)
+		VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.information_id},#{item.goods_id},#{item.suppl_name},#{item.suppl_value})
+		</foreach>
+	</insert>
+	<select id="getPurchaseGoodsSupplyList" resultType="com.youzhicai.purchaseplan.po.PurchaseGoodsSupplyPO">
+		SELECT
+		<include refid="goods_columns"></include>
+		FROM
+		t_sppurchase_goodssupply
+		WHERE
+		1 =1 
+		<if test="informationId != null and informationId != '' ">
+			AND information_id = #{informationId}
+		</if>
+		ORDER BY id DESC;
+	</select>
+</mapper>

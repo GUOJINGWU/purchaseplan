@@ -1,0 +1,86 @@
+/* 反色按钮 */
+.yui-btn-inverse {
+	border: 1px solid;
+	background-color: #fff;
+}
+
+.yui-btn-inverse.yui-skin-blue {
+	border-color: #2d8ff7;
+	color: #2d8ff7;
+}
+
+.yui-btn-inverse.yui-skin-blue .yui-icon {
+	background-position: -15px 0;
+}
+
+.yui-btn-inverse.yui-skin-blue:hover {
+	background-color: #2d8ff7;
+	border-color: #2d8ff7;
+	color: #fff;
+}
+
+.yui-btn-inverse.yui-skin-blue:hover .yui-icon {
+	background-position: 0 0;
+}
+
+.yui-btn-inverse.yui-skin-orange {
+	border-color: #ff5400;
+	color: #ff5400;
+}
+
+.yui-btn-inverse.yui-skin-orange .yui-icon {
+	background-position: -32px 0;
+}
+
+.yui-btn-inverse.yui-skin-orange:hover {
+	background-color: #ff6a00;
+	border-color: #ff6a00;
+	color: #fff;
+}
+
+.yui-btn-inverse.yui-skin-orange:hover .yui-icon {
+	background-position: 0 0;
+}
+
+.detachmentList {
+	margin-top: 8px;
+	font-size: 14px;
+}
+
+.detachmentList li {
+	margin-bottom: 18px;
+}
+
+.detachmentList a {
+	display: inline-block;
+	margin-left: 18px;
+	color: #2d8ff7;
+}
+
+.detachmentList a:hover span {
+	text-decoration: underline;
+}
+
+.detachmentList img, .detachmentList span {
+	vertical-align: middle;
+}
+
+.icon-import {
+	background-image: url("../images/iconsImport.png");
+	background-repeat: no-repeat;
+}
+
+.icon-search {
+	background-image: url("../images/iconsSearch.png");
+	background-repeat: no-repeat;
+}
+
+.icon-warn {
+	background-image: url("../images/iconsWarn.png");
+	background-repeat: no-repeat;
+}
+
+.icon-upload {
+	background-image: url("../images/iconsUpload.png");
+	background-repeat: no-repeat;
+}

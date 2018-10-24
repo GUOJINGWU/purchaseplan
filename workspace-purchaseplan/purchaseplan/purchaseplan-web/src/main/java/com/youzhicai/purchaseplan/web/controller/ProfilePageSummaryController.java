@@ -1,0 +1,34 @@
+package com.youzhicai.purchaseplan.web.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.youzhicai.purchaseplan.web.util.ConfigUtil;
+
+/**
+ * 需求计划汇总
+ * @ClassName: ProfilePageSummaryController
+ * @author: xia.nan
+ * @date: 2018年10月9日 下午4:22:26
+ *
+ *
+ */
+@Controller
+@RequestMapping("profilepagesummary")
+public class ProfilePageSummaryController {
+
+    /**
+     * 需求计划汇总主页面
+     * @Title: index
+     * @param: @param model
+     * @param: @return
+     * @return: String
+     * @throws
+     */
+    @RequestMapping("index")
+    public String index(Model model) {
+        String currentProjectURL = ConfigUtil.getValue("currentProjectURL");
+        return "profilePage/profilePage";
+    }
+}

@@ -1,0 +1,97 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>退回</title>
+<link href="//cdn.ukzhicai.com/layui/css/layui.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" th:href="@{/res/css/dialog-content.css}" />
+<script src="https://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="//cdn.youzhicai.com/layui/layui.js"></script>
+</head>
+<body>
+	<div class="inner-content yzc-clearfix">
+		<div style="height:350px;overflow-y:auto;">
+		
+			<div class="yui-title-c yui-clearfix">
+			<h4 class="yui-title-first yui-fl">需求概况</h4>
+										
+			</div>
+			<form class="layui-form plan-form" action="" style="padding-top: 20px">
+				<div class="layui-form-item plan-item">
+				
+					<div class="layui-inline">
+						<label class="plan-label">需求编号： </label>
+						<span class="text-c">111</span>
+					</div>
+					<div class="layui-inline">
+						<label class="plan-label">需求类型： </label>
+						<span class="text-c">集中采购（月度计划）</span>
+					</div>
+					<div class="layui-inline">
+						<label class="plan-label">发起人： </label>
+						<span class="text-c">张建</span>
+					</div>
+					<div class="layui-inline">
+						<label class="plan-label">发起时间： </label>
+						<span class="text-c">2018-10-15 08:00:00</span>
+					</div>	
+					<div class="layui-inline">
+						<label class="plan-label">紧急原因： </label>
+						<span class="text-c">222222222222222</span>
+					</div>						
+				</div>							
+			</form>
+			
+			<div class="yui-title-c yui-clearfix">
+				<h4 class="yui-title-first yui-fl">物资详情</h4>
+											
+			</div>
+			<form class="layui-form plan-form" action="" style="padding-top: 20px">
+				<div class="layui-form-item plan-item">
+				
+					<div class="layui-inline">
+						<label class="plan-label">物资详情： </label>
+						<span class="text-c">111</span>
+					</div>
+				
+					<div class="layui-inline">
+						<label class="plan-label">物资编码： </label>
+						<span class="text-c">11</span>
+					</div>
+					<div class="layui-inline">
+						<label class="plan-label">材质/品牌： </label>
+						<span class="text-c">2018-10-15 08:00:00</span>
+					</div>	
+					<div class="layui-inline">
+						<label class="plan-label">规格/型号： </label>
+						<span class="text-c">22222</span>
+					</div>
+					<div class="layui-inline">
+						<label class="plan-label">计量单位： </label>
+						<span class="text-c">222222</span>
+					</div>	
+					<div class="layui-inline">
+						<label class="plan-label">需求数量： </label>
+						<span class="text-c">22222</span>
+					</div>	
+					<div class="layui-inline">
+						<label class="plan-label">其他属性： </label>
+						<span class="text-c">22222</span>
+					</div>	
+					<div class="layui-inline">
+						<label class="plan-label">备注： </label>
+						<span class="text-c">22222</span>
+					</div>
+					<div class="layui-inline">
+						<label class="plan-label">备注说明： </label>
+						<span class="text-c">22222</span>
+					</div>								
+				</div>							
+			</form>
+			
+		</div>
+		
+	</div>
+	<script th:src="@{/res/js/plan.js}" type="text/javascript"></script>
+	
+</body>
+</html>

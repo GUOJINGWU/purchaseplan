@@ -1,0 +1,52 @@
+package com.youzhicai.purchaseplan.web.entity;
+
+import java.util.List;
+
+public class DataBean {
+    private Integer pageNum;
+    private Integer pageSize;
+    private Integer totalNum;
+    private Integer totalPageNum;
+    private List<ListBean> list;
+
+    public Integer getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(Integer pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public Integer getTotalNum() {
+        return totalNum;
+    }
+
+    public void setTotalNum(Integer totalNum) {
+        this.totalNum = totalNum;
+    }
+
+    public Integer getTotalPageNum() {
+        return totalPageNum;
+    }
+
+    public void setTotalPageNum(Integer totalPageNum) {
+        this.totalPageNum = totalPageNum;
+    }
+
+    public List<ListBean> getList() {
+        return list;
+    }
+
+    public void setList(List<ListBean> list) {
+        this.list = list;
+    }
+
+}

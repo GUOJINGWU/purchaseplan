@@ -1,0 +1,81 @@
+package com.youzhicai.purchaseplan.entity;
+
+/**
+ * 需求对接人
+ * 
+ * @author xia.nan
+ *
+ */
+public class PurchaseRecipient {
+    /** 主键id **/
+    protected Long id;
+    /** 基本信息id **/
+    protected Long information_id;
+    /** 需求接收人id **/
+    protected String recipient_id;
+    /** 需求接收人姓名 **/
+    protected String recipient_name;
+    /** 企业id **/
+    protected String company_id;
+    /** 企业名称 **/
+    protected String company_name;
+    /** 接收人状态 **/
+    protected Integer recipient_status;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getInformation_id() {
+        return information_id;
+    }
+
+    public void setInformation_id(Long information_id) {
+        this.information_id = information_id;
+    }
+
+    public String getRecipient_id() {
+        return recipient_id;
+    }
+
+    public void setRecipient_id(String recipient_id) {
+        this.recipient_id = recipient_id;
+    }
+
+    public String getRecipient_name() {
+        return recipient_name;
+    }
+
+    public void setRecipient_name(String recipient_name) {
+        this.recipient_name = recipient_name;
+    }
+
+    public String getCompany_id() {
+        return company_id;
+    }
+
+    public void setCompany_id(String company_id) {
+        this.company_id = company_id;
+    }
+
+    public String getCompany_name() {
+        return company_name;
+    }
+
+    public void setCompany_name(String company_name) {
+        this.company_name = company_name;
+    }
+
+    public Integer getRecipient_status() {
+        return recipient_status;
+    }
+
+    public void setRecipient_status(Integer recipient_status) {
+        this.recipient_status = recipient_status;
+    }
+
+}

@@ -1,0 +1,75 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>增加人员</title>
+<link href="//cdn.ukzhicai.com/layui/css/layui.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" th:href="@{/res/css/dialog-content.css}" />
+<link rel="stylesheet" th:href="@{/res/css/global.css}" />
+<link rel="stylesheet" th:href="@{/res/css/ui-dialog.css}" />
+<script src="https://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="//cdn.ukzhicai.com/layui/layui.js"></script>
+</head>
+<body>
+	<div class="inner-content">
+		<span class="label-left">常用人员：</span>
+		<span th:text="${purchaserecipientvo.recipient_name}" id="commonName"></span>
+		<br></br>
+		<span class="label-left">需求类型：</span>
+		<span th:text="${concentrated.value}" th:if="${purchasetype == concentrated.status}"></span>
+		<span th:text="${customize.value}" th:if="${purchasetype == customize.status}"></span>
+		<br></br>
+		<span class="label-left">已选人员：</span>
+		<span id="selectedPerson"></span>
+		<div style="height: 222px; overflow: auto">
+			<table class="layui-table">
+				<colgroup>
+					<col width="10%" />
+					<col width="20%" />
+					<col width="20%" />
+					<col width="10%" />
+				</colgroup>
+				<thead>
+					<tr>
+						<th class="yzc-aCenter">序号</th>
+						<th class="yzc-aCenter">可选人员</th>
+						<th class="yzc-aCenter">公司名称</th>
+						<th class="yzc-aCenter">操作</th>
+					</tr>
+				</thead>
+				<tbody id="addMemberTables">
+					<tr th:each="list,listStat:${purchaserecipient}" th:if="${purchaserecipientsize != 0}">
+						<td class="yzc-aCenter" th:text="${listStat.count}"></td>
+						<td class="yzc-aCenter" th:text="${list.recipient_name}"></td>
+						<td class="yzc-aCenter" th:text="${list.company_name}"></td>
+						<td class="yzc-aCenter" th:id="${list.recipient_id}">
+							<a th:onclick="'removeMember(\''+${list.recipient_id}+'\',\''+${list.recipient_name}+'\',\''+${list.company_id}+'\',\''+${list.company_name}+'\')'" class="plan-a"
+								th:if="${list == 3}">取消</a>
+							<a th:onclick="'addMember(\''+${list.recipient_id}+'\',\''+${list.recipient_name}+'\',\''+${list.company_id}+'\',\''+${list.company_name}+'\')'" class="plan-a"
+								th:if="${list != 3}">选择</a>
+						</td>
+					</tr>
+					<tr th:if="${purchaserecipientsize == 0}">
+						<td class="yzc-aCenter" colspan="4">暂无添加</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<p class="button-group">
+			<a class="plan-white-btn plan-margin-btn back-btn">返回</a>
+			<a class="plan-blue-btn sure-btn" id="success">确定</a>
+		</p>
+	</div>
+	<input type="hidden" id="informationid" th:value="${informationid}" />
+	<input type="hidden" id="purchasetype" th:value="${purchasetype}" />
+	<input id="commonId" name="commonId" type="hidden" th:value="${purchaserecipientvo.recipient_id}" />
+
+	<input type="hidden" id="recipientId" />
+	<input type="hidden" id="recipientName" />
+	<input type="hidden" id="companyId" />
+	<input type="hidden" id="companyName" />
+	<script th:src="@{/res/util/dialog-plus-min.js}" type="text/javascript"></script>
+	<script th:src="@{/res/util/purchaseplanCommon.js}" type="text/javascript"></script>
+	<script th:src="@{/res/js/plan.js}" type="text/javascript"></script>
+	<script th:src="@{/res/javascript/addMemberJS.js}" type="text/javascript"></script>
+</body>
+</html>

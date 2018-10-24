@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace的值就是dao接口的完整路径 -->
+<mapper namespace="com.youzhicai.purchaseplan.dao.PurchasePlanListDAO">
+	<sql id="planlist_columns_withoutID">
+		information_id,plan_coding,goods_id,plan_name,plan_brand,plan_specifications,other_attribute,plan_unit,
+		plan_manual,plan_quantity,create_id,create_name,create_time,plan_status
+	</sql>
+
+	<sql id="planlist_columns">
+		id,
+		<include refid="planlist_columns_withoutID" />
+	</sql>
+
+	<insert id="savePurchasePlanList" parameterType="java.util.List">
+		INSERT INTO t_sppurchase_planlist ( information_id, plan_coding,goods_id,
+		plan_name,
+		plan_brand, plan_specifications, other_attribute, plan_unit,
+		plan_manual, plan_quantity, create_id, create_name, create_time,
+		plan_status )
+		VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.information_id},#{item.plan_coding},#{item.goods_id},#{item.plan_name},#{item.plan_brand},#{item.plan_specifications},#{item.other_attribute},
+			#{item.plan_unit},#{item.plan_manual},#{item.plan_quantity},#{item.create_id},#{item.create_name},SYSDATE(),#{item.plan_status})
+		</foreach>
+	</insert>
+
+	<select id="getPurchasePlanList" resultType="com.youzhicai.purchaseplan.vo.PurchasePlanListVO">
+		SELECT
+		<include refid="planlist_columns"></include>
+		FROM t_sppurchase_planlist
+		WHERE 1=1
+		<if test="id != null and id != '' ">
+			AND id = #{id}
+		</if>
+		<if test="informationId != null and informationId != '' ">
+			AND information_id = #{informationId}
+		</if>
+		ORDER BY id DESC;
+	</select>
+
+	<delete id="removePurchasePlanListById" parameterType="Long">
+		DELETE
+		FROM t_sppurchase_planlist WHERE id = #{id};
+	</delete>
+
+	<delete id="removePurchasePlanListByinformationId" parameterType="Long">
+		DELETE
+		FROM t_sppurchase_planlist WHERE information_id = #{informationId};
+	</delete>
+</mapper>

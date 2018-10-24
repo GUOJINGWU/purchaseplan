@@ -1,0 +1,167 @@
+package com.youzhicai.purchaseplan.entity;
+
+import java.util.Date;
+
+public class PurchaseInformation {
+    /** 主键id **/
+    protected Long id;
+    /** 需求编号 **/
+    protected String demand_number;
+    /** 计划类型状态 **/
+    protected Integer plan_type_status;
+    /** 计划类型名称 **/
+    protected String plan_type_value;
+    /** 紧急原因 **/
+    protected String emergency_cause;
+    /** 紧急原因 **/
+    protected String instruction_manual;
+    /** 需求附件 **/
+    protected String attachment_id;
+    /** 创建人id **/
+    protected String create_id;
+    /** 创建人name **/
+    protected String create_name;
+    /** 发起时间 **/
+    protected Date start_time;
+    /** 创建时间 **/
+    protected Date create_time;
+    /** 企业id **/
+    protected String company_id;
+    /** 企业名称 **/
+    protected String company_name;
+    /** 需求类型 **/
+    protected Integer purchase_type;
+    /** 部门id **/
+    protected String department_id;
+    /** 部门名称 **/
+    protected String department_name;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getDemand_number() {
+        return demand_number;
+    }
+
+    public void setDemand_number(String demand_number) {
+        this.demand_number = demand_number;
+    }
+
+    public Integer getPlan_type_status() {
+        return plan_type_status;
+    }
+
+    public void setPlan_type_status(Integer plan_type_status) {
+        this.plan_type_status = plan_type_status;
+    }
+
+    public String getPlan_type_value() {
+        return plan_type_value;
+    }
+
+    public void setPlan_type_value(String plan_type_value) {
+        this.plan_type_value = plan_type_value;
+    }
+
+    public String getEmergency_cause() {
+        return emergency_cause;
+    }
+
+    public void setEmergency_cause(String emergency_cause) {
+        this.emergency_cause = emergency_cause;
+    }
+
+    public String getInstruction_manual() {
+        return instruction_manual;
+    }
+
+    public void setInstruction_manual(String instruction_manual) {
+        this.instruction_manual = instruction_manual;
+    }
+
+    public String getAttachment_id() {
+        return attachment_id;
+    }
+
+    public void setAttachment_id(String attachment_id) {
+        this.attachment_id = attachment_id;
+    }
+
+    public String getCreate_id() {
+        return create_id;
+    }
+
+    public void setCreate_id(String create_id) {
+        this.create_id = create_id;
+    }
+
+    public String getCreate_name() {
+        return create_name;
+    }
+
+    public void setCreate_name(String create_name) {
+        this.create_name = create_name;
+    }
+
+    public Date getStart_time() {
+        return start_time;
+    }
+
+    public void setStart_time(Date start_time) {
+        this.start_time = start_time;
+    }
+
+    public Date getCreate_time() {
+        return create_time;
+    }
+
+    public void setCreate_time(Date create_time) {
+        this.create_time = create_time;
+    }
+
+    public String getCompany_id() {
+        return company_id;
+    }
+
+    public void setCompany_id(String company_id) {
+        this.company_id = company_id;
+    }
+
+    public String getCompany_name() {
+        return company_name;
+    }
+
+    public void setCompany_name(String company_name) {
+        this.company_name = company_name;
+    }
+
+    public Integer getPurchase_type() {
+        return purchase_type;
+    }
+
+    public void setPurchase_type(Integer purchase_type) {
+        this.purchase_type = purchase_type;
+    }
+
+    public String getDepartment_id() {
+        return department_id;
+    }
+
+    public void setDepartment_id(String department_id) {
+        this.department_id = department_id;
+    }
+
+    public String getDepartment_name() {
+        return department_name;
+    }
+
+    public void setDepartment_name(String department_name) {
+        this.department_name = department_name;
+    }
+
+}

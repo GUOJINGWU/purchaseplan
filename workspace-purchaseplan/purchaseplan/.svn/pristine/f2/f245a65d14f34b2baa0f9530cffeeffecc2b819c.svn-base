@@ -1,0 +1,9 @@
+$(function() {
+	$(".close-btn").click(function() {
+		top.CloseDialog("add-material");
+	});
+});
+
+function search(){
+	alert(1111);
+}

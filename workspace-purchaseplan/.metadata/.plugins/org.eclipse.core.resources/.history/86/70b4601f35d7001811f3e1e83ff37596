@@ -1,0 +1,633 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>需求计划汇总</title>
+<link rel="stylesheet" th:href="@{/res/css/global.css}"></link>
+<link rel="stylesheet" th:href="@{/res/css/source.css}"></link>
+<link rel="stylesheet" th:href="@{/res/css/plan.css}"></link>
+<link rel="stylesheet" th:href="@{/res/css/ui-dialog.css}" />
+</head>
+<div th:include="default/yzcheader :: header"></div>
+<body class="yzc-skin-buyer">
+	<div class="yzc-frame-loading"></div>
+	<div class="yzc-frame-top"></div>
+	<div class="yzc-frame-center">
+		<div class="yzc-frame-right">
+			<div class="yzc-frame-body">
+				<div class="main-container">
+					<div class="layui-tab-content" style="padding: 0">
+						<div class="layui-tab-item layui-show" style="position: relative">
+							<a class="plan-blue-btn merger-plan" href="javascript:mergerAll();">合并计划</a>
+							<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+								<ul class="layui-tab-title" style="background-color: #fff">
+									<li class="layui-this">
+										待合并需求（
+										<span>12</span>
+										）
+									</li>
+									<li>
+										已合并（
+										<span>12</span>
+										）
+									</li>
+									<li>
+										全部（
+										<span>12</span>
+										）
+									</li>
+								</ul>
+								<div class="layui-tab-content" style="padding: 0">
+									<div class="layui-tab-item layui-show">
+										<div class="main-con-form source">
+											<form class="layui-form plan-form limit-form" action="" style="padding-top: 20px" id="form_1">
+												<div class="layui-form-item plan-item" style="position: relative">
+													<div class="layui-inline" style="width: 442px">
+														<label class="plan-label">1物资名称/编号 </label>
+														<div class="layui-input-block layui-input2" style="display: inherit; margin-left: 0; position: relative;">
+															<input lay-verify="title" id="planCodeOrName" name="planCodeOrName" autocomplete="off" class="layui-input  input-clear" placeholder="请输入要搜索的项目名称或编号" type="text"
+																style="width: 322px; display: inline-block;" />
+														</div>
+													</div>
+													<div class="layui-inline" style="width: 258px">
+														<label class="plan-label">发起人： </label>
+														<div class="layui-input-block layui-input2" style="display: inherit; margin-left: 0; position: relative;">
+															<input id="startUserName" name="startUserName" lay-verify="title" autocomplete="off" class="layui-input  input-clear" placeholder="" type="text"
+																style="width: 140px; display: inline-block;" />
+														</div>
+													</div>
+													<div class="layui-inline" style="width: 324px">
+														<label class="plan-label">发起单位： </label>
+														<div class="layui-input-block  layui-input2 showform limit-select-width" style="margin-left: 0px !important; display: inline-block; width: 170px">
+															<select name="start_department" class="plan-type">
+																<option value="">全部</option>
+																<option th:each="list,listStat:${subsidiarieList}" th:value="${list.subsidiaryId}" th:text="${list.subsidiaryName}"></option>
+															</select>
+														</div>
+													</div>
+													<div class="layui-inline" style="width: 442px">
+														<label class="plan-label">需求编号： </label>
+														<div class="layui-input-block layui-input2" style="display: inherit; margin-left: 0; position: relative;">
+															<input id="demand_number" name="demand_number" lay-verify="title" autocomplete="off" class="layui-input  input-clear" placeholder="请输入要搜索的需求编号" type="text"
+																style="width: 322px; display: inline-block;" />
+														</div>
+													</div>
+													<div class="layui-inline" style="width: 258px">
+														<label class="plan-label">物资状态： </label>
+														<div class="layui-input-block  layui-input2 showform limit-select-s" style="margin-left: 0px !important; display: inline-block; width: 140px">
+															<select name="plan_status" class="plan-type">
+																<option value="">请选择</option>
+																<option th:each="list,listStat:${planstatusenum}" th:value="${list.key}" th:text="${list.value}"></option>
+															</select>
+														</div>
+													</div>
+													<div class="layui-inline" style="width: 294px">
+														<label class="plan-label">计划类型： </label>
+														<div class="layui-input-block  layui-input2 showform limit-select-width" style="margin-left: 0px !important; display: inline-block; width: 170px">
+															<select name="plan_type_status" class="plan-type">
+																<option value="">请选择</option>
+																<option th:each="list,listStat:${plantypeenum}" th:value="${list.key}" th:text="${list.value}"></option>
+															</select>
+														</div>
+													</div>
+													<div class="layui-inline" style="width: 442px">
+														<label class="plan-label">发起时间：</label>
+														<div class="layui-input-block layui-input2" style="display: inherit; margin-left: 0; position: relative;">
+															<input id="startTime" name="startTime" lay-verify="title" autocomplete="off" class="layui-input  input-clear" placeholder="请选择开始时间" type="text"
+																style="width: 150px; display: inline-block;" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" />
+															<span>至</span>
+															<input id="endTime" name="endTime" lay-verify="title" autocomplete="off" class="layui-input  input-clear" placeholder="请选择截止时间" type="text"
+																style="width: 150px; display: inline-block;" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" />
+														</div>
+													</div>
+													<div class="layui-inline" style="width: 242px; margin-left: 114px">
+														<input type="checkbox" class="merging-check" id="merging-check1" />
+														<label for="merging-check1" style="vertical-align: super;">合并同编码物资</label>
+													</div>
+													<a class="plan-radius-btn plan-search-btn" onclick="searchPage(1)">搜索</a>
+													<a class="plan-radius-btn plan-clear-btn" onclick="onClear()">清除</a>
+												</div>
+											</form>
+										</div>
+									</div>
+									<div class="layui-tab-item">
+										<div class="main-con-form source">
+											<form class="layui-form plan-form limit-form" action="" style="padding-top: 20px" id="form_2">
+												<div class="layui-form-item plan-item" style="position: relative">
+													<div class="layui-inline" style="width: 442px">
+														<label class="plan-label">2物资名称/编号 </label>
+														<div class="layui-input-block layui-input2" style="display: inherit; margin-left: 0; position: relative;">
+															<input lay-verify="title" id="planCodeOrName" name="planCodeOrName" autocomplete="off" class="layui-input  input-clear" placeholder="请输入要搜索的项目名称或编号" type="text"
+																style="width: 322px; display: inline-block;" />
+														</div>
+													</div>
+													<div class="layui-inline" style="width: 258px">
+														<label class="plan-label">发起人： </label>
+														<div class="layui-input-block layui-input2" style="display: inherit; margin-left: 0; position: relative;">
+															<input id="startUserName" name="startUserName" lay-verify="title" autocomplete="off" class="layui-input  input-clear" placeholder="" type="text"
+																style="width: 140px; display: inline-block;" />
+														</div>
+													</div>
+													<div class="layui-inline" style="width: 324px">
+														<label class="plan-label">发起单位： </label>
+														<div class="layui-input-block  layui-input2 showform limit-select-width" style="margin-left: 0px !important; display: inline-block; width: 170px">
+															<select name="start_department" class="plan-type">
+																<option value="">全部</option>
+																<option th:each="list,listStat:${subsidiarieList}" th:value="${list.subsidiaryId}" th:text="${list.subsidiaryName}"></option>
+															</select>
+														</div>
+													</div>
+													<div class="layui-inline" style="width: 442px">
+														<label class="plan-label">需求编号： </label>
+														<div class="layui-input-block layui-input2" style="display: inherit; margin-left: 0; position: relative;">
+															<input id="demand_number" name="demand_number" lay-verify="title" autocomplete="off" class="layui-input  input-clear" placeholder="请输入要搜索的需求编号" type="text"
+																style="width: 322px; display: inline-block;" />
+														</div>
+													</div>
+													<div class="layui-inline" style="width: 258px">
+														<label class="plan-label">物资状态： </label>
+														<div class="layui-input-block  layui-input2 showform limit-select-s" style="margin-left: 0px !important; display: inline-block; width: 140px">
+															<select name="plan_status" class="plan-type">
+																<option value="">请选择</option>
+																<option th:each="list,listStat:${planstatusenum}" th:value="${list.key}" th:text="${list.value}"></option>
+															</select>
+														</div>
+													</div>
+													<div class="layui-inline" style="width: 294px">
+														<label class="plan-label">计划类型： </label>
+														<div class="layui-input-block  layui-input2 showform limit-select-width" style="margin-left: 0px !important; display: inline-block; width: 170px">
+															<select name="plan_type_status" class="plan-type">
+																<option value="">请选择</option>
+																<option th:each="list,listStat:${plantypeenum}" th:value="${list.key}" th:text="${list.value}"></option>
+															</select>
+														</div>
+													</div>
+													<div class="layui-inline" style="width: 442px">
+														<label class="plan-label">发起时间：</label>
+														<div class="layui-input-block layui-input2" style="display: inherit; margin-left: 0; position: relative;">
+															<input id="startTime" name="startTime" lay-verify="title" autocomplete="off" class="layui-input  input-clear" placeholder="请选择开始时间" type="text"
+																style="width: 150px; display: inline-block;" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" />
+															<span>至</span>
+															<input id="endTime" name="endTime" lay-verify="title" autocomplete="off" class="layui-input  input-clear" placeholder="请选择截止时间" type="text"
+																style="width: 150px; display: inline-block;" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" />
+														</div>
+													</div>
+													<div class="layui-inline" style="width: 242px; margin-left: 114px">
+														<input type="checkbox" class="merging-check" id="merging-check2" />
+														<label for="merging-check2" style="vertical-align: super;">合并同编码物资</label>
+													</div>
+													<a class="plan-radius-btn plan-search-btn" onclick="searchPage(2)">搜索</a>
+													<a class="plan-radius-btn plan-clear-btn" onclick="onClear()">清除</a>
+												</div>
+											</form>
+										</div>
+									</div>
+									<div class="layui-tab-item">
+										<div class="main-con-form source">
+											<form class="layui-form plan-form limit-form" action="" style="padding-top: 20px" id="form_3">
+												<div class="layui-form-item plan-item" style="position: relative">
+													<div class="layui-inline" style="width: 442px">
+														<label class="plan-label">3物资名称/编号 </label>
+														<div class="layui-input-block layui-input2" style="display: inherit; margin-left: 0; position: relative;">
+															<input lay-verify="title" id="planCodeOrName" name="planCodeOrName" autocomplete="off" class="layui-input  input-clear" placeholder="请输入要搜索的项目名称或编号" type="text"
+																style="width: 322px; display: inline-block;" />
+														</div>
+													</div>
+													<div class="layui-inline" style="width: 258px">
+														<label class="plan-label">发起人： </label>
+														<div class="layui-input-block layui-input2" style="display: inherit; margin-left: 0; position: relative;">
+															<input id="startUserName" name="startUserName" lay-verify="title" autocomplete="off" class="layui-input  input-clear" placeholder="" type="text"
+																style="width: 140px; display: inline-block;" />
+														</div>
+													</div>
+													<div class="layui-inline" style="width: 324px">
+														<label class="plan-label">发起单位： </label>
+														<div class="layui-input-block  layui-input2 showform limit-select-width" style="margin-left: 0px !important; display: inline-block; width: 170px">
+															<select name="start_department" class="plan-type">
+																<option value="">全部</option>
+																<option th:each="list,listStat:${subsidiarieList}" th:value="${list.subsidiaryId}" th:text="${list.subsidiaryName}"></option>
+															</select>
+														</div>
+													</div>
+													<div class="layui-inline" style="width: 442px">
+														<label class="plan-label">需求编号： </label>
+														<div class="layui-input-block layui-input2" style="display: inherit; margin-left: 0; position: relative;">
+															<input id="demand_number" name="demand_number" lay-verify="title" autocomplete="off" class="layui-input  input-clear" placeholder="请输入要搜索的需求编号" type="text"
+																style="width: 322px; display: inline-block;" />
+														</div>
+													</div>
+													<div class="layui-inline" style="width: 258px">
+														<label class="plan-label">物资状态： </label>
+														<div class="layui-input-block  layui-input2 showform limit-select-s" style="margin-left: 0px !important; display: inline-block; width: 140px">
+															<select name="plan_status" class="plan-type">
+																<option value="">请选择</option>
+																<option th:each="list,listStat:${planstatusenum}" th:value="${list.key}" th:text="${list.value}"></option>
+															</select>
+														</div>
+													</div>
+													<div class="layui-inline" style="width: 294px">
+														<label class="plan-label">计划类型： </label>
+														<div class="layui-input-block  layui-input2 showform limit-select-width" style="margin-left: 0px !important; display: inline-block; width: 170px">
+															<select name="plan_type_status" class="plan-type">
+																<option value="">请选择</option>
+																<option th:each="list,listStat:${plantypeenum}" th:value="${list.key}" th:text="${list.value}"></option>
+															</select>
+														</div>
+													</div>
+													<div class="layui-inline" style="width: 442px">
+														<label class="plan-label">发起时间：</label>
+														<div class="layui-input-block layui-input2" style="display: inherit; margin-left: 0; position: relative;">
+															<input id="startTime" name="startTime" lay-verify="title" autocomplete="off" class="layui-input  input-clear" placeholder="请选择开始时间" type="text"
+																style="width: 150px; display: inline-block;" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" />
+															<span>至</span>
+															<input id="endTime" name="endTime" lay-verify="title" autocomplete="off" class="layui-input  input-clear" placeholder="请选择截止时间" type="text"
+																style="width: 150px; display: inline-block;" onclick="layui.laydate({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" />
+														</div>
+													</div>
+													<div class="layui-inline" style="width: 242px; margin-left: 114px">
+														<input type="checkbox" class="merging-check" id="merging-check3" />
+														<label for="merging-check3" style="vertical-align: super;">合并同编码物资</label>
+													</div>
+													<a class="plan-radius-btn plan-search-btn" onclick="searchPage(3)">搜索</a>
+													<a class="plan-radius-btn plan-clear-btn" onclick="onClear()">清除</a>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="main-con-table source source-padding yzc-clearfix">
+						<div class="table-con">
+							<table class="layui-table">
+								<colgroup>
+									<col width="2%" />
+									<col width="4%" />
+									<col width="13%" />
+									<col width="5%" />
+									<col width="5%" />
+									<col width="10%" />
+									<col width="9%" />
+									<col width="8%" />
+									<col width="8%" />
+									<col width="14%" />
+									<col width="8%" />
+									<col width="14%" />
+								</colgroup>
+								<thead>
+									<tr>
+										<th class="yzc-aCenter">
+											<label>
+												<input id="sel_1" onchange="selectAll()" type="checkbox" value="1" />
+											</label>
+										</th>
+										<th class="yzc-aCenter">序号</th>
+										<th class="yzc-aCenter">物资名称/编码</th>
+										<th class="yzc-aCenter">需求数量</th>
+										<th class="yzc-aCenter">单位</th>
+										<th class="yzc-aCenter">其他属性</th>
+										<th class="yzc-aCenter">备注</th>
+										<th class="yzc-aCenter">发起人</th>
+										<th class="yzc-aCenter">发起单位</th>
+										<th class="yzc-aCenter">发起时间</th>
+										<th class="yzc-aCenter">物资状态</th>
+										<th class="yzc-aCenter">操作</th>
+									</tr>
+								</thead>
+								<tbody id="plantotalTable">
+									<tr th:each="list,listStat:${page.list}" th:if="${page.totalNum != 0}">
+										<td class="yzc-aCenter">
+											<input type="checkbox" th:value="${list.id}" name="tableCheck" />
+										</td>
+										<td class="yzc-aCenter" th:text="${listStat.count}"></td>
+										<td style="position: relative">
+											<p th:text="${list.plan_coding}"></p>
+											<p th:text="${list.plan_name}"></p>
+											<img alt="" src="../../res/images/urgent.png" class="plan-state-img"></img>
+										</td>
+										<td class="yzc-aCenter" th:text="${list.plan_quantity}"></td>
+										<td class="yzc-aCenter" th:text="${list.plan_unit}"></td>
+										<td class="yzc-aCenter">
+											<p style="line-height: 25px" th:each="supply,supplyStat:${list.goodsSupplyList}" th:text="${supply.suppl_name}+':'+${supply.suppl_value}"></p>
+										</td>
+										<td class="yzc-aCenter" th:text="${list.plan_manual}"></td>
+										<td class="yzc-aCenter" th:text="${list.start_username}"></td>
+										<td class="yzc-aCenter" th:text="${list.start_departmentname}"></td>
+										<td class="yzc-aCenter" th:text="${#dates.format(list.start_time,'yyyy-MM-dd HH:mm:ss')}"></td>
+										<td class="yzc-aCenter" th:text="${list.plan_status_value}"></td>
+										<td class="yzc-aCenter" th:switch="${list.plan_status}">
+											<p th:case="${1}">
+												<a href="javascript:back();" class="plan-a">退回</a>
+												<a href="javascript:;" class="plan-a" th:onclick="'viewDemand(\''+${list.id}+'\')'">查看</a>
+											</p>
+											<p th:case="${2}">
+												<a href="javascript:;" class="plan-a" th:onclick="'viewDemand(\''+${list.id}+'\')'">查看</a>
+											</p>
+											<p th:case="${3}">
+												<a href="javascript:;" class="plan-a" th:onclick="'viewDemand(\''+${list.id}+'\')'">查看</a>
+											</p>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="layui-box layui-laypage layui-laypage-default yzc-fr" id="pageDiv"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="yzc-frame-bottom ">
+		<ul>
+			<li>
+				<a>网站首页</a>
+			</li>
+			<li>
+				<a>招标采购</a>
+			</li>
+			<li>
+				<a>企业采购</a>
+			</li>
+			<li>
+				<a>优采金融</a>
+			</li>
+			<li>
+				<a>帮助中心</a>
+			</li>
+			<li class="yzc-frame-nob">
+				<a>意见反馈</a>
+			</li>
+		</ul>
+		<p>Copyright©2016 优质采（北京）科技发展有限公司 版权所有 皖ICP备05004986号</p>
+	</div>
+	<script th:src="@{/res/js/jquery.js}" type="text/javascript"></script>
+	<script th:src="@{/res/js/placeholder.js}" type="text/javascript"></script>
+	<script th:src="@{/res/util/dialog-plus-min.js}" type="text/javascript"></script>
+	<script th:src="@{/res/util/purchaseplanCommon.js}" type="text/javascript"></script>
+	<script th:src="@{/res/util/form-to-json.js}" type="text/javascript"></script>
+	<script th:inline="javascript">
+		$(function() {
+			layui.use('laydate', function() {
+				var laydate = layui.laydate;
+
+				var start = {
+					min : laydate.now(),
+					max : '2099-06-16 23:59:59',
+					istoday : false,
+					choose : function(datas) {
+						end.min = datas; //开始日选好后，重置结束日的最小日期
+						end.start = datas //将结束日的初始值设定为开始日
+					}
+				};
+				var end = {
+					min : laydate.now(),
+					max : '2099-06-16 23:59:59',
+					istoday : false,
+					choose : function(datas) {
+						start.max = datas; //结束日选好后，重置开始日的最大日期
+					}
+				};
+				document.getElementById('LAY_demorange_s').onclick = function() {
+					start.elem = this;
+					laydate(start);
+				}
+				document.getElementById('LAY_demorange_e').onclick = function() {
+					end.elem = this
+					laydate(end);
+				}
+			});
+			layui.use('laydate', function() {
+				var laydate = layui.laydate;
+				var start = {
+					min : laydate.now(),
+					max : '2099-06-16 23:59:59',
+					istoday : false,
+					choose : function(datas) {
+						end.min = datas; //开始日选好后，重置结束日的最小日期
+						end.start = datas //将结束日的初始值设定为开始日
+					}
+				};
+				var end = {
+					min : laydate.now(),
+					max : '2099-06-16 23:59:59',
+					istoday : false,
+					choose : function(datas) {
+						start.max = datas; //结束日选好后，重置开始日的最大日期
+					}
+				};
+				document.getElementById('LAY_demorange_s').onclick = function() {
+					start.elem = this;
+					laydate(start);
+				}
+				document.getElementById('LAY_demorange_e').onclick = function() {
+					end.elem = this
+					laydate(end);
+				}
+			});
+			var totalPageNum = [[ ${page.totalPageNum} ]]; //取值
+			var pageNum = [[${page.pageNum}]]; //取值
+			console.log("totalPageNum-->" + totalPageNum);
+			console.log("pageNum-->" + pageNum);
+			layui.use([ 'laypage', 'layer' ], function() {
+				var laypage = layui.laypage, layer = layui.layer;
+				laypage({
+					cont : 'pageDiv',
+					pages : totalPageNum, //总页数
+					groups : 5, //连续显示分页数
+					curr : pageNum,
+					jump : function(obj) {
+						if (pageNum != obj.curr) {
+							var datas = $("#demand-plan-form").toJSON();
+							datas.pageNum = obj.curr;
+							searchDemand(datas)
+						}
+					}
+				});
+			});
+			Date.prototype.pattern = function(fmt) {
+				var o = {
+					"M+" : this.getMonth() + 1, //月份           
+					"d+" : this.getDate(), //日           
+					"h+" : this.getHours() % 12 == 0 ? 12 : this.getHours() % 12, //小时           
+					"H+" : this.getHours(), //小时           
+					"m+" : this.getMinutes(), //分           
+					"s+" : this.getSeconds(), //秒           
+					"q+" : Math.floor((this.getMonth() + 3) / 3), //季度           
+					"S" : this.getMilliseconds()
+				//毫秒           
+				};
+				var week = {
+					"0" : "/u65e5",
+					"1" : "/u4e00",
+					"2" : "/u4e8c",
+					"3" : "/u4e09",
+					"4" : "/u56db",
+					"5" : "/u4e94",
+					"6" : "/u516d"
+				};
+				if (/(y+)/.test(fmt)) {
+					fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+				}
+				if (/(E+)/.test(fmt)) {
+					fmt = fmt.replace(RegExp.$1, ((RegExp.$1.length > 1) ? (RegExp.$1.length > 2 ? "/u661f/u671f" : "/u5468") : "") + week[this.getDay() + ""]);
+				}
+				for ( var k in o) {
+					if (new RegExp("(" + k + ")").test(fmt)) {
+						fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+					}
+				}
+				return fmt;
+			}
+		});
+		//点击清空
+		function onClear() {
+			$(".input-clear").val('');
+			$(".plan-type").val('');
+			$(".merging-check").attr("checked", false);
+			layui.use('form', function() {
+				var form = layui.form(); //只有执行了这一步，部分表单元素才会自动修饰成功
+				form.render();
+			});
+		}
+
+		function goBackDemand(id) {
+			alert(id);
+		}
+
+		function viewDemand(id) {
+			alert(id);
+		}
+
+		function searchPage(num) {
+			var datas = $("#form_"+num).toJSON();
+			console.log(datas);
+			searchDemand(datas);
+		}
+
+		function searchDemand(inPath) {
+			$.ajax({
+				url : '/demandplantotalrestcontroller/refreshpages',
+				type : 'POST',
+				contentType : 'application/json; charset=UTF-8',
+				datType : "JSON",
+				data : JSON.stringify(inPath),
+				async : false,
+				success : function(res) {
+					$('#demand-plan-tables').empty();
+					var totalNum = res.data.totalNum;
+					var json = res.data.list;
+					var tableHtml = '';
+					if (totalNum == 0) {
+						tableHtml += '<tr>'
+						tableHtml += '<td class="yzc-aCenter" colspan="8">暂无物资信息</td>';
+						tableHtml += '</tr>';
+						$('#plantotalTable').html(tableHtml);
+						return;
+					}
+					for ( var index in json) {
+						var startTime = new Date(json[index].start_time).pattern("yyyy-MM-dd HH:mm:ss");
+						tableHtml += '<tr>';
+						tableHtml += '	<td class="yzc-aCenter">' + (index + 1) + '</td>';
+						tableHtml += '	<td style="position: relative">';
+						if (json[index].plan_type_status == 2) {
+							tableHtml += ' <img alt="" src="../../res/images/urgent.png" class="plan-state-img"></img>';
+						}
+						tableHtml += '' + json[index].demand_number + '</td>';
+						tableHtml += '	<td class="yzc-aCenter">' + json[index].start_username + '</td>';
+						tableHtml += '	<td class="yzc-aCenter">' + json[index].start_departmentname + '</td>';
+						tableHtml += '	<td class="yzc-aCenter">' + startTime + '</td>';
+						tableHtml += '	<td class="yzc-aCenter">' + json[index].purchase_type_value + '</td>';
+						tableHtml += '	<td class="yzc-aCenter">' + json[index].node_status_value + '</td>';
+						tableHtml += '	<td class="yzc-aCenter">';
+						if (json[index].node_status == 1) {
+							tableHtml += '<p>';
+							tableHtml += '<a href="javascript:;" class="plan-a" onclick="removeDemand(' + json[index].id + ')">删除</a>';
+							tableHtml += '<a href="javascript:;" class="plan-a" onclick="viewDemand(' + json[index].id + ')">查看</a>';
+							tableHtml += '<a href="javascript:;" class="plan-a" onclick="submitDemand(' + json[index].id + ')">提交计划</a>';
+							tableHtml += '</p>';
+						} else if (json[index].node_status == 2) {
+							tableHtml += '<p>';
+							tableHtml += '<a href="javascript:;" class="plan-a" onclick="viewDemand(' + json[index].id + ')">查看</a>';
+							tableHtml += '</p>';
+						} else if (json[index].node_status == 3) {
+							tableHtml += '<p>';
+							tableHtml += '<a href="javascript:;" class="plan-a" onclick="viewDemand(' + json[index].id + ')">查看</a>';
+							tableHtml += '<a href="javascript:;" class="plan-a" onclick="gobackDemand(' + json[index].id + ')">撤回</a>';
+							tableHtml += '</p>';
+						} else if (json[index].node_status == 4) {
+							tableHtml += '<p>';
+							tableHtml += '<a href="javascript:;" class="plan-a" onclick="removeDemand(' + json[index].id + ')">删除</a>';
+							tableHtml += '<a href="javascript:;" class="plan-a" onclick="viewDemand(' + json[index].id + ')">查看</a>';
+							tableHtml += '<a href="javascript:;" class="plan-a" onclick="submitDemand(' + json[index].id + ')">提交计划</a>';
+							tableHtml += '</p>';
+						} else if (json[index].node_status == 5) {
+							tableHtml += '<a href="javascript:;" class="plan-a" onclick="viewDemand(' + json[index].id + ')">查看</a>';
+						}
+						tableHtml += '	</td>';
+						tableHtml += '</tr>';
+					}
+					$('#plantotalTable').html(tableHtml);
+					var totalPageNum = res.data.totalPageNum;//取值
+					var pageNum = res.data.pageNum;//取值
+					layui.use([ 'laypage', 'layer' ], function() {
+						var laypage = layui.laypage, layer = layui.layer;
+						laypage({
+							cont : 'pageDiv',
+							pages : totalPageNum, //总页数
+							groups : 5, //连续显示分页数
+							curr : pageNum,
+							jump : function(obj) {
+								if (pageNum != obj.curr) {
+									var datas = $("#demand-plan-form").toJSON();
+									datas.pageNum = obj.curr;
+									// searchDemand(datas);
+								}
+							}
+						});
+					});
+					return;
+				},
+				error : function(res) {
+					console.log(res);
+				}
+			})
+		}
+		
+		function selectAll(){
+		    var isCheck=$("#sel_1").is(':checked');  //获得全选复选框是否选中
+		    $("input[name = 'tableCheck']").each(function() {  
+		        this.checked = isCheck;       //循环赋值给每个复选框是否选中
+		    });
+		}
+		
+		function mergerAll(){
+			var tableCheckValue = $("input[name = 'tableCheck']");
+			var plan =[];
+		    for(k in tableCheckValue){
+		    	var data = {};
+		        if(tableCheckValue[k].checked){
+		        	data.id = tableCheckValue[k].value;
+		        	plan.push(data);
+		        }
+		    }
+		    
+		    /* 计划合并确认弹窗 */
+		   OpenSimpleUrl("plan-confirm", "计划合并确认", "/pageJump5", '800px', '540px');
+		  
+	
+			
+		}
+		
+		  /* 退回弹窗 */
+		function back(){
+		
+		  
+		   OpenSimpleUrl("back", "退回需求", "/pageJump6", '580px', '400px');
+		  
+	
+			
+		}
+		
+	</script>
+</body>
+</html>

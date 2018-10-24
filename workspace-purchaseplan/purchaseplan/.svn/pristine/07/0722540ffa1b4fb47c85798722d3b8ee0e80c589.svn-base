@@ -1,0 +1,141 @@
+package com.youzhicai.purchaseplan.web.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.alibaba.fastjson.JSON;
+import com.youzhicai.purchaseplan.api.PurchaseInformationAPI;
+import com.youzhicai.purchaseplan.api.PurchasePlanListAPI;
+import com.youzhicai.purchaseplan.dto.PurchaseInformationDTO;
+import com.youzhicai.purchaseplan.dto.PurchaseInformationPageDTO;
+import com.youzhicai.purchaseplan.dto.PurchasePlanListDTO;
+import com.youzhicai.purchaseplan.handler.Page;
+import com.youzhicai.purchaseplan.vo.PurchaseInformationVO;
+import com.youzhicai.purchaseplan.vo.PurchasePlanListVO;
+import com.youzhicai.purchaseplan.web.common.BasicEnum;
+import com.youzhicai.purchaseplan.web.common.PlanTypeEnum;
+import com.youzhicai.purchaseplan.web.common.PurchaseTypeEnum;
+import com.youzhicai.purchaseplan.web.domain.AuthInfo;
+import com.youzhicai.purchaseplan.web.entity.GoodsInpathModel;
+import com.youzhicai.purchaseplan.web.entity.GoodsOutModel;
+import com.youzhicai.purchaseplan.web.entity.PairModel;
+import com.youzhicai.purchaseplan.web.service.MaterialstoreService;
+import com.youzhicai.purchaseplan.web.util.ConfigUtil;
+
+/**
+ * 需求计划发起
+ * @ClassName:  PurchasePlanController
+ * @author: xia.nan
+ * @date:   2018年10月9日 下午4:22:36
+ *
+ *
+ */
+@Controller
+@RequestMapping("purchaseplan")
+public class PurchasePlanController {
+
+    @Autowired
+    private PurchaseInformationAPI purchaseInformationAPI;
+    @Autowired
+    private PurchasePlanListAPI planListAPI;
+    @Autowired
+    private MaterialstoreService materialstoreService;
+
+    /**
+     * 需求计划发起主页面
+     * @Title: index
+     * @param: @param model
+     * @param: @return
+     * @return: String
+     * @throws
+     */
+    @RequestMapping("index")
+    public String index(HttpServletRequest request, Model model) {
+        String currentProjectURL = ConfigUtil.getValue("currentProjectURL");
+        model.addAttribute("currentProjectURL", currentProjectURL);
+        AuthInfo info = (AuthInfo) request.getSession().getAttribute(ConfigUtil.getValue("AuthInfo"));
+        PurchaseInformationPageDTO dto = new PurchaseInformationPageDTO();
+        dto.setCreate_id(info.getId());
+        Page<PurchaseInformationVO> page = purchaseInformationAPI.getPurchaseInformationByPage(dto);
+        model.addAttribute("departmentList", info.getDepartmentList());
+        model.addAttribute("purchaseInformationVO", page);
+        model.addAttribute("concentrated", PurchaseTypeEnum.CONCENTRATED);
+        model.addAttribute("customize", PurchaseTypeEnum.CUSTOMIZE);
+        List<PairModel> statusEnumList = new ArrayList<PairModel>();
+        for (BasicEnum en : BasicEnum.values()) {
+            statusEnumList.add(new PairModel(en.getStatus() + "", en.getValue()));
+        }
+        model.addAttribute("statusEnumList", statusEnumList);
+
+        GoodsInpathModel modelin = new GoodsInpathModel();
+        modelin.setCompanyId("123456");
+        GoodsOutModel goodsListForSearch = materialstoreService.getGoodsListForSearch(modelin);
+        System.err.println("goodsListForSearch--->" + JSON.toJSONString(goodsListForSearch));
+        return "demandPlan/demandPlan";
+    }
+
+    /**
+     * 跳转新增采购需求页面
+     * @Title: add
+     * @param request
+     * @param model
+     * @return
+     * @return: String
+     */
+    @RequestMapping("demandplansheet")
+    public String getDemandPlanSheet(HttpServletRequest request, Model model, Integer purchasetype,
+            Long informationid) {
+        System.err.println("purchasetype-->" + purchasetype);
+        System.err.println("informationid--->" + informationid);
+        AuthInfo auth = (AuthInfo) request.getSession().getAttribute(ConfigUtil.getValue("AuthInfo"));
+        System.err.println(JSON.toJSONString(auth));
+        model.addAttribute("purchasetype", purchasetype.intValue());
+        model.addAttribute("concentrated", PurchaseTypeEnum.CONCENTRATED);
+        model.addAttribute("customize", PurchaseTypeEnum.CUSTOMIZE);
+        List<PairModel> plantypeList = new ArrayList<PairModel>();
+        for (PlanTypeEnum en : PlanTypeEnum.values()) {
+            plantypeList.add(new PairModel(en.getStatus() + "", en.getValue()));
+        }
+        System.err.println("plantypeList--->" + JSON.toJSONString(plantypeList));
+        model.addAttribute("plantypelist", plantypeList);
+        PurchaseInformationVO vo;
+        PurchaseInformationDTO informationDTO = new PurchaseInformationDTO();
+        informationDTO.setId(informationid);
+        informationDTO.setCreate_id(auth.getId());
+        informationDTO.setCompany_id(auth.getUser_ID());
+        List<PurchaseInformationVO> purchaseInformationList = purchaseInformationAPI
+                .getPurchaseInformationList(informationDTO);
+        if (purchaseInformationList.size() > 0) {
+            vo = purchaseInformationList.get(0);
+        } else {
+            vo = purchaseInformationAPI.getNewPurchaseInformation(informationDTO);
+        }
+        System.err.println("purchaseinformationvo--->" + JSON.toJSONString(vo));
+        model.addAttribute("purchaseinformationvo", vo);
+
+        PurchasePlanListDTO planDTO = new PurchasePlanListDTO();
+        planDTO.setInformation_id(vo.getId());
+        List<PurchasePlanListVO> purchasePlanList = planListAPI.getPurchasePlanList(planDTO);
+        System.err.println("purchasePlanList--->" + JSON.toJSONString(purchasePlanList));
+        model.addAttribute("purchaseplanlist", purchasePlanList);
+        model.addAttribute("purchaseplanlistsize", purchasePlanList.size());
+        return "demandPlanSheet/demandPlanSheet";
+    }
+
+    // dialogContent/addMaterial
+
+    @RequestMapping("addmaterial")
+    public String getaddMaterial(HttpServletRequest request, Model model, Integer purchasetype, Long informationid) {
+        model.addAttribute("purchasetype", purchasetype);
+        model.addAttribute("informationid", informationid);
+        return "dialogContent/addMaterial";
+    }
+
+}

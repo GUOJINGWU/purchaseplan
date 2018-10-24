@@ -1,0 +1,71 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>发起项目</title>
+<link href="//cdn.ukzhicai.com/layui/css/layui.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" th:href="@{/res/css/dialog-content.css}" />
+<link rel="stylesheet" th:href="@{/res/css/global.css}" />
+<link rel="stylesheet" th:href="@{/res/css/ui-dialog.css}" />
+<script src="https://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="@{/res/js/Common.js}"></script>
+<script type="text/javascript" src="//cdn.ukzhicai.com/layui/layui.js"></script>
+</head>
+<body>
+	<div class="inner-content">
+		
+		<div>
+			<form class="layui-form plan-form limit-form" action=""  style="padding-top: 20px">
+    
+					<div class="layui-form-item" style="position:relative">
+
+
+	   		 			<div class="layui-inline" style="width: 464px">
+		        			<label class="plan-label" style="width: 110px !important;">采购类型：
+		       		 		</label>
+		        			<div class="layui-input-block" style="margin-left: 0px; display: inline-block;">
+								<input type="radio" name="plan_type_status" value="1" title="询价采购"  lay-filter="plan-type" />
+								<input type="radio" name="plan_type_status" value="2" title="企业招标"  lay-filter="plan-type" />
+								<input type="radio" name="plan_type_status" value="3" title="线下续单"  lay-filter="plan-type" />
+								
+							</div>
+						</div>
+					
+					</div>
+					</form>
+		</div>
+		<p class="button-group" style="margin-top: 154px;">
+			<a class="plan-white-btn plan-margin-btn cancel-btn">取消</a>
+			<a class="plan-blue-btn sure-btn">确定</a>
+		</p>
+	</div>
+	
+	<script>
+	
+	layui.use([ 'form' ], function() {
+		var form = layui.form();
+		form.on('radio(plan-type)', function(data) {
+			
+		});
+	});
+	
+	
+	/* 点击取消 */
+	$(".cancel-btn").click(function() {
+		
+		top.CloseDialog("initiating-project");
+	});
+	    
+
+	/* 点击确定 */
+	$(".sure-btn").click(function() {
+		
+		top.CloseDialog("initiating-project");
+	});
+	    
+
+	</script>
+	
+	
+	
+</body>
+</html>

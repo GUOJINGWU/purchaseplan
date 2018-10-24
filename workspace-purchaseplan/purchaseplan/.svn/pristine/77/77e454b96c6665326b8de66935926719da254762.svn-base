@@ -1,0 +1,50 @@
+package com.youzhicai.purchaseplan.service;
+
+import java.util.List;
+
+import com.youzhicai.purchaseplan.dto.PurchaseInformationDTO;
+import com.youzhicai.purchaseplan.dto.PurchaseInformationPageDTO;
+import com.youzhicai.purchaseplan.handler.Page;
+import com.youzhicai.purchaseplan.vo.PurchaseInformationVO;
+
+public interface PurchaseInformationService {
+    /**
+     * 新增需求信息
+     * @param pDto
+     * @return
+     */
+    public int savePurchaseInformation(PurchaseInformationDTO pDto);
+
+    /**
+     * 
+     * @param pageDTO
+     * @return
+     */
+    public Page<PurchaseInformationVO> getPurchaseInformationByPage(PurchaseInformationPageDTO pageDTO);
+
+    /**
+     * 
+     * @param pDto
+     * @return
+     */
+    public List<PurchaseInformationVO> getPurchaseInformationList(PurchaseInformationDTO pDto);
+
+    /**
+     * 
+     * @Title: createNewInformation
+     * @param inst
+     * @return
+     * @return: Long
+     */
+    public Long createNewInformation(PurchaseInformationDTO inst);
+
+    /**
+     * 
+     * @Title: submitPlan
+     * @param informationDTO
+     * @return
+     * @return: int
+     */
+    public int submitPlan(PurchaseInformationDTO informationDTO);
+
+}

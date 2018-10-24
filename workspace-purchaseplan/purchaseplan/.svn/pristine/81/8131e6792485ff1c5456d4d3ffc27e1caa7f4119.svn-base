@@ -1,0 +1,28 @@
+$(function() {
+	layui.use([ 'form' ], function() {
+		var form = layui.form();
+		form.on('radio(plan-type)', function(data) {
+			if(data.value == 2){
+				console.log(data.value);
+				$('.emergency-item').show();
+				form.render();
+			}else if(data.value == 1){
+				console.log(data.value);
+				$('.emergency-item').hide();
+				form.render();
+			}
+		});
+	});
+});
+
+// 添加人员弹窗
+function addMember() {
+	var currentProjectURL = $("#currentProjectURL").val();
+	OpenSimpleUrl("add-people", "", currentProjectURL + "/pageJump", '640px', '416px');
+}
+
+// 添加物资弹窗
+function addMaterial() {
+	var currentProjectURL = $("#currentProjectURL").val();
+	OpenSimpleUrl("add-material", "", currentProjectURL + "/pageJump1", '940px', '600px');
+}
